@@ -25,6 +25,15 @@
     <Filter Include="Pliki źródłowe\external\imgui">
       <UniqueIdentifier>{6c0d0727-aa2a-47d5-ba65-013b9593df23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\external\sdl">
+      <UniqueIdentifier>{6c981b12-342f-4c8b-9957-3d7b2b257028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\external\sdl\centurion">
+      <UniqueIdentifier>{fbb6717b-c1a4-4aa0-95c1-9ec3c2df370d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\external\glew">
+      <UniqueIdentifier>{daf3ea81-2296-46f9-b3d8-efdcc001ed39}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -46,6 +55,15 @@
       <Filter>Pliki źródłowe\external\imgui</Filter>
     </ClCompile>
     <ClCompile Include="external\imgui\imgui_impl_opengl3.cpp">
+      <Filter>Pliki źródłowe\external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui\imgui_impl_win32.cpp">
+      <Filter>Pliki źródłowe\external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui\imgui_impl_sdl2.cpp">
+      <Filter>Pliki źródłowe\external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="external\imgui\imgui_impl_sdlrenderer2.cpp">
       <Filter>Pliki źródłowe\external\imgui</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,5 +92,313 @@
     <ClInclude Include="external\imgui\imgui_impl_opengl3_loader.h">
       <Filter>Pliki nagłówkowe\external\imgui</Filter>
     </ClInclude>
+    <ClInclude Include="external\imgui\imgui_impl_win32.h">
+      <Filter>Pliki nagłówkowe\external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\fonts.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\fwd.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\initialization.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\input.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\io.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\system.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\video.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\audio\fade_status.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\audio\music.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\audio\music_type.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\audio\sound_effect.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\common\errors.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\common\literals.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\common\logging.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\common\math.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\common\memory.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\common\primitives.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\common\result.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\common\sdl_string.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\common\traits.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\common\utils.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\common\version.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\concurrency\condition.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\concurrency\locks.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\concurrency\mutex.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\concurrency\semaphore.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\concurrency\thread.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\detail\array_utils.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\detail\owner_handle_api.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\detail\sdl_deleter.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\detail\sdl_version_at_least.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\detail\stdlib.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\detail\tuple_type_index.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\events\audio_events.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\events\controller_events.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\events\event_base.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\events\event_dispatcher.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\events\event_handler.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\events\event_sink.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\events\event_type.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\events\joystick_events.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\events\misc_events.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\events\mouse_events.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\events\window_events.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\fonts\experimental\font_bundle.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\fonts\font.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\fonts\font_cache.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\fonts\font_direction.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\fonts\font_hint.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\fonts\wrap_alignment.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\input\button_state.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\input\controller.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\input\joystick.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\input\keyboard.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\input\mouse.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\input\sensor.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\input\touch.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\io\file.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\io\file_mode.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\io\file_type.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\io\paths.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\io\seek_mode.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\system\clipboard.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\system\endian.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\system\locale.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\system\memory.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\system\platform.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\system\power.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\system\shared_object.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\system\timer.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\video\animation.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\video\blend.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\video\color.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\video\display.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\video\flash_op.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\video\message_box.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\video\opengl.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\video\pixels.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\video\renderer.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\video\renderer_info.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\video\surface.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\video\texture.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\video\unicode_string.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\video\vulkan.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\video\window.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\audio.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\centurion.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\common.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\concurrency.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\events.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\centurion\features.hpp">
+      <Filter>Pliki nagłówkowe\external\sdl\centurion</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui\imgui_impl_sdl2.h">
+      <Filter>Pliki nagłówkowe\external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="external\imgui\imgui_impl_sdlrenderer2.h">
+      <Filter>Pliki nagłówkowe\external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\entity.hpp">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="external\sdl\SDL2.lib">
+      <Filter>Pliki nagłówkowe\external\sdl</Filter>
+    </Library>
+    <Library Include="external\sdl\SDL2test.lib">
+      <Filter>Pliki nagłówkowe\external\sdl</Filter>
+    </Library>
+    <Library Include="external\sdl\SDL2_ttf.lib">
+      <Filter>Pliki nagłówkowe\external\sdl</Filter>
+    </Library>
+    <Library Include="external\sdl\SDL2_mixer.lib">
+      <Filter>Pliki nagłówkowe\external\sdl</Filter>
+    </Library>
+    <Library Include="external\sdl\SDL2_image.lib">
+      <Filter>Pliki nagłówkowe\external\sdl</Filter>
+    </Library>
+    <Library Include="external\glew\glew32.lib">
+      <Filter>Pliki nagłówkowe\external\glew</Filter>
+    </Library>
+    <Library Include="external\glew\glew32s.lib">
+      <Filter>Pliki nagłówkowe\external\glew</Filter>
+    </Library>
   </ItemGroup>
 </Project>

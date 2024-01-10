@@ -71,10 +71,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\Projekty\Eon\external;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Projekty\Eon\external;D:\Projekty\Eon\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>D:\Projekty\Eon\external;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Projekty\Eon\external;D:\Projekty\Eon\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -107,13 +107,15 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>D:\Projekty\Eon\external\sdl\SDL2test.lib;D:\Projekty\Eon\external\sdl\SDL2_ttf.lib;D:\Projekty\Eon\external\sdl\SDL2_image.lib;D:\Projekty\Eon\external\sdl\SDL2_mixer.lib;D:\Projekty\Eon\external\glew\glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -130,6 +132,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>D:\Projekty\Eon\external\sdl\SDL2.lib;D:\Projekty\Eon\external\sdl\SDL2_ttf.lib;D:\Projekty\Eon\external\sdl\SDL2_image.lib;D:\Projekty\Eon\external\sdl\SDL2_mixer.lib;D:\Projekty\Eon\external\glew\glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -137,19 +140,126 @@
     <ClCompile Include="external\imgui\imgui_demo.cpp" />
     <ClCompile Include="external\imgui\imgui_draw.cpp" />
     <ClCompile Include="external\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="external\imgui\imgui_impl_sdl2.cpp" />
+    <ClCompile Include="external\imgui\imgui_impl_sdlrenderer2.cpp" />
+    <ClCompile Include="external\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="external\imgui\imgui_tables.cpp" />
     <ClCompile Include="external\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="external\centurion\audio.hpp" />
+    <ClInclude Include="external\centurion\audio\fade_status.hpp" />
+    <ClInclude Include="external\centurion\audio\music.hpp" />
+    <ClInclude Include="external\centurion\audio\music_type.hpp" />
+    <ClInclude Include="external\centurion\audio\sound_effect.hpp" />
+    <ClInclude Include="external\centurion\centurion.hpp" />
+    <ClInclude Include="external\centurion\common.hpp" />
+    <ClInclude Include="external\centurion\common\errors.hpp" />
+    <ClInclude Include="external\centurion\common\literals.hpp" />
+    <ClInclude Include="external\centurion\common\logging.hpp" />
+    <ClInclude Include="external\centurion\common\math.hpp" />
+    <ClInclude Include="external\centurion\common\memory.hpp" />
+    <ClInclude Include="external\centurion\common\primitives.hpp" />
+    <ClInclude Include="external\centurion\common\result.hpp" />
+    <ClInclude Include="external\centurion\common\sdl_string.hpp" />
+    <ClInclude Include="external\centurion\common\traits.hpp" />
+    <ClInclude Include="external\centurion\common\utils.hpp" />
+    <ClInclude Include="external\centurion\common\version.hpp" />
+    <ClInclude Include="external\centurion\concurrency.hpp" />
+    <ClInclude Include="external\centurion\concurrency\condition.hpp" />
+    <ClInclude Include="external\centurion\concurrency\locks.hpp" />
+    <ClInclude Include="external\centurion\concurrency\mutex.hpp" />
+    <ClInclude Include="external\centurion\concurrency\semaphore.hpp" />
+    <ClInclude Include="external\centurion\concurrency\thread.hpp" />
+    <ClInclude Include="external\centurion\detail\array_utils.hpp" />
+    <ClInclude Include="external\centurion\detail\owner_handle_api.hpp" />
+    <ClInclude Include="external\centurion\detail\sdl_deleter.hpp" />
+    <ClInclude Include="external\centurion\detail\sdl_version_at_least.hpp" />
+    <ClInclude Include="external\centurion\detail\stdlib.hpp" />
+    <ClInclude Include="external\centurion\detail\tuple_type_index.hpp" />
+    <ClInclude Include="external\centurion\events.hpp" />
+    <ClInclude Include="external\centurion\events\audio_events.hpp" />
+    <ClInclude Include="external\centurion\events\controller_events.hpp" />
+    <ClInclude Include="external\centurion\events\event_base.hpp" />
+    <ClInclude Include="external\centurion\events\event_dispatcher.hpp" />
+    <ClInclude Include="external\centurion\events\event_handler.hpp" />
+    <ClInclude Include="external\centurion\events\event_sink.hpp" />
+    <ClInclude Include="external\centurion\events\event_type.hpp" />
+    <ClInclude Include="external\centurion\events\joystick_events.hpp" />
+    <ClInclude Include="external\centurion\events\misc_events.hpp" />
+    <ClInclude Include="external\centurion\events\mouse_events.hpp" />
+    <ClInclude Include="external\centurion\events\window_events.hpp" />
+    <ClInclude Include="external\centurion\features.hpp" />
+    <ClInclude Include="external\centurion\fonts.hpp" />
+    <ClInclude Include="external\centurion\fonts\experimental\font_bundle.hpp" />
+    <ClInclude Include="external\centurion\fonts\font.hpp" />
+    <ClInclude Include="external\centurion\fonts\font_cache.hpp" />
+    <ClInclude Include="external\centurion\fonts\font_direction.hpp" />
+    <ClInclude Include="external\centurion\fonts\font_hint.hpp" />
+    <ClInclude Include="external\centurion\fonts\wrap_alignment.hpp" />
+    <ClInclude Include="external\centurion\fwd.hpp" />
+    <ClInclude Include="external\centurion\initialization.hpp" />
+    <ClInclude Include="external\centurion\input.hpp" />
+    <ClInclude Include="external\centurion\input\button_state.hpp" />
+    <ClInclude Include="external\centurion\input\controller.hpp" />
+    <ClInclude Include="external\centurion\input\joystick.hpp" />
+    <ClInclude Include="external\centurion\input\keyboard.hpp" />
+    <ClInclude Include="external\centurion\input\mouse.hpp" />
+    <ClInclude Include="external\centurion\input\sensor.hpp" />
+    <ClInclude Include="external\centurion\input\touch.hpp" />
+    <ClInclude Include="external\centurion\io.hpp" />
+    <ClInclude Include="external\centurion\io\file.hpp" />
+    <ClInclude Include="external\centurion\io\file_mode.hpp" />
+    <ClInclude Include="external\centurion\io\file_type.hpp" />
+    <ClInclude Include="external\centurion\io\paths.hpp" />
+    <ClInclude Include="external\centurion\io\seek_mode.hpp" />
+    <ClInclude Include="external\centurion\system.hpp" />
+    <ClInclude Include="external\centurion\system\clipboard.hpp" />
+    <ClInclude Include="external\centurion\system\endian.hpp" />
+    <ClInclude Include="external\centurion\system\locale.hpp" />
+    <ClInclude Include="external\centurion\system\memory.hpp" />
+    <ClInclude Include="external\centurion\system\platform.hpp" />
+    <ClInclude Include="external\centurion\system\power.hpp" />
+    <ClInclude Include="external\centurion\system\shared_object.hpp" />
+    <ClInclude Include="external\centurion\system\timer.hpp" />
+    <ClInclude Include="external\centurion\video.hpp" />
+    <ClInclude Include="external\centurion\video\animation.hpp" />
+    <ClInclude Include="external\centurion\video\blend.hpp" />
+    <ClInclude Include="external\centurion\video\color.hpp" />
+    <ClInclude Include="external\centurion\video\display.hpp" />
+    <ClInclude Include="external\centurion\video\flash_op.hpp" />
+    <ClInclude Include="external\centurion\video\message_box.hpp" />
+    <ClInclude Include="external\centurion\video\opengl.hpp" />
+    <ClInclude Include="external\centurion\video\pixels.hpp" />
+    <ClInclude Include="external\centurion\video\renderer.hpp" />
+    <ClInclude Include="external\centurion\video\renderer_info.hpp" />
+    <ClInclude Include="external\centurion\video\surface.hpp" />
+    <ClInclude Include="external\centurion\video\texture.hpp" />
+    <ClInclude Include="external\centurion\video\unicode_string.hpp" />
+    <ClInclude Include="external\centurion\video\vulkan.hpp" />
+    <ClInclude Include="external\centurion\video\window.hpp" />
     <ClInclude Include="external\imgui\imconfig.h" />
     <ClInclude Include="external\imgui\imgui.h" />
     <ClInclude Include="external\imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="external\imgui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="external\imgui\imgui_impl_sdl2.h" />
+    <ClInclude Include="external\imgui\imgui_impl_sdlrenderer2.h" />
+    <ClInclude Include="external\imgui\imgui_impl_win32.h" />
     <ClInclude Include="external\imgui\imgui_internal.h" />
     <ClInclude Include="external\imgui\imstb_rectpack.h" />
     <ClInclude Include="external\imgui\imstb_textedit.h" />
     <ClInclude Include="external\imgui\imstb_truetype.h" />
+    <ClInclude Include="include\entity.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="external\glew\glew32.lib" />
+    <Library Include="external\glew\glew32s.lib" />
+    <Library Include="external\sdl\SDL2.lib" />
+    <Library Include="external\sdl\SDL2test.lib" />
+    <Library Include="external\sdl\SDL2_image.lib" />
+    <Library Include="external\sdl\SDL2_mixer.lib" />
+    <Library Include="external\sdl\SDL2_ttf.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
