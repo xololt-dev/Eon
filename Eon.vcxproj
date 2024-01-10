@@ -115,7 +115,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>D:\Projekty\Eon\external\sdl\SDL2test.lib;D:\Projekty\Eon\external\sdl\SDL2_ttf.lib;D:\Projekty\Eon\external\sdl\SDL2_image.lib;D:\Projekty\Eon\external\sdl\SDL2_mixer.lib;D:\Projekty\Eon\external\glew\glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>D:\Projekty\Eon\external\sdl\SDL2.lib;D:\Projekty\Eon\external\sdl\SDL2main.lib;D:\Projekty\Eon\external\sdl\SDL2_ttf.lib;D:\Projekty\Eon\external\sdl\SDL2_image.lib;D:\Projekty\Eon\external\sdl\SDL2_mixer.lib;D:\Projekty\Eon\external\glew\glew32s.lib;D:\Projekty\Eon\external\glew\glew32.lib;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.22621.0\um\x64\OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -132,7 +132,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>D:\Projekty\Eon\external\sdl\SDL2.lib;D:\Projekty\Eon\external\sdl\SDL2_ttf.lib;D:\Projekty\Eon\external\sdl\SDL2_image.lib;D:\Projekty\Eon\external\sdl\SDL2_mixer.lib;D:\Projekty\Eon\external\glew\glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>D:\Projekty\Eon\external\sdl\SDL2.lib;D:\Projekty\Eon\external\sdl\SDL2main.lib;D:\Projekty\Eon\external\sdl\SDL2_ttf.lib;D:\Projekty\Eon\external\sdl\SDL2_image.lib;D:\Projekty\Eon\external\sdl\SDL2_mixer.lib;D:\Projekty\Eon\external\glew\glew32.lib;D:\Projekty\Eon\external\glew\glew32s.lib;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.22621.0\um\x64\OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -256,6 +256,7 @@
     <Library Include="external\glew\glew32.lib" />
     <Library Include="external\glew\glew32s.lib" />
     <Library Include="external\sdl\SDL2.lib" />
+    <Library Include="external\sdl\SDL2main.lib" />
     <Library Include="external\sdl\SDL2test.lib" />
     <Library Include="external\sdl\SDL2_image.lib" />
     <Library Include="external\sdl\SDL2_mixer.lib" />

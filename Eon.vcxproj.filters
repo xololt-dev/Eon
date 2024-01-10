@@ -400,5 +400,8 @@
     <Library Include="external\glew\glew32s.lib">
       <Filter>Pliki nagłówkowe\external\glew</Filter>
     </Library>
+    <Library Include="external\sdl\SDL2main.lib">
+      <Filter>Pliki nagłówkowe\external\sdl</Filter>
+    </Library>
   </ItemGroup>
 </Project>
