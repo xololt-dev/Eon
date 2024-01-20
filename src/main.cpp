@@ -9,11 +9,12 @@
 // #include <gl/GL.h>
 
 #include <entity.hpp>
+#include <physics.hpp>
 
 int main(int argc, char* argv[]) {
 	std::cout << "Hello world!\n";
-	Eon::Player e(0);
-	e.DisplayID();
+	eon::Player e(0);
+	e.displayID();
 	
     // Setup SDL
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0)

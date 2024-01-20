@@ -1,13 +1,13 @@
 #pragma once
 #include <iostream>
 
-namespace Eon {
+namespace eon {
 	class Entity {
 	public:
 		Entity (int _id) :
 			id(_id) {}
 
-		virtual void DisplayID()
+		virtual void displayID()
 			{ std::cout << "Entity ID: " <<  id << "\n"; };
 
 	protected:
@@ -21,7 +21,7 @@ namespace Eon {
 		PhysicsEntity (int _id) :
 			Entity(_id) {}
 
-		void DisplayID() 
+		void displayID() 
 			{ std::cout << "PhysicsEntity ID: " << id << "\n"; };
 
 	protected:
@@ -33,7 +33,7 @@ namespace Eon {
 		Player (int _id) :
 			PhysicsEntity (_id) {}
 
-		void DisplayID() 
+		void displayID() 
 			{ std::cout << "Player ID: " << id << "\n"; };
 
 	private:
@@ -45,7 +45,7 @@ namespace Eon {
 		Zombie(int _id) :
 			PhysicsEntity(_id) {}
 
-		void DisplayID()
+		void displayID()
 			{ std::cout << "Zombie ID: " << id << "\n"; };
 	private:
 		// ai imput
