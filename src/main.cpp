@@ -8,8 +8,10 @@
 #include <sdl/SDL_opengl.h>
 // #include <gl/GL.h>
 
+#include <core.hpp>
 #include <entity.hpp>
 #include <physics.hpp>
+#include <controls.hpp>
 
 int main(int argc, char* argv[]) {
 	std::cout << "Hello world!\n";

@@ -3,81 +3,87 @@
 title: ECS
 ---
 classDiagram
-	World <-- Entity
-	World <-- PhysicsControl
-	World <-- AudioControl
-	World <-- RenderControl
-	World <-- InputControl
-	PhysicsControl <-- PhysicsBody
-	AudioControl <-- Audio
-	RenderControl <-- Render
-	Entity o-- PlayerInput
-	Entity o-- AI_Input
-	InputControl <-- PlayerInput
-	InputControl <-- AI_Input
-	Entity o-- Render
-	Render <|-- 2DRender
-	Entity o-- Audio
-	Entity o-- PhysicsBody
+	Eon <-- Entity
+	Eon <-- PhysicsControl
+	Eon <-- AudioControl
+	Eon <-- RenderControl
+	Eon <-- InputControl
+	Component <|-- AudioComponent
+	Component <|-- PhysicsComponent
+	Component <|-- RenderComponent
+	Component <|-- InputComponent
+	PhysicsControl <-- PhysicsComponent
+	AudioControl <-- AudioComponent
+	RenderControl <-- RenderComponent
+	Entity o-- InputComponent
+	Eon o-- InputComponent
+	InputComponent <|-- PlayerInputComponent
+	InputComponent <|-- AI_InputComponent
+	InputControl <-- InputComponent
+	Entity o-- RenderComponent
+	Eon o-- RenderComponent
+	RenderComponent <|-- 2DRenderComponent
+	Entity o-- AudioComponent
+	Eon o-- AudioComponent
+	Entity o-- PhysicsComponent
 	
-class World {
+class Eon {
 	#string info
 }
 
-namespace EonEntity {
-	class Entity {
-		#int id = 0
-		#Vector3 position = [0.0, 0.0, 0.0]
-		#Vector~Component~ component
-		+Entity(_id) 
-		+DisplayID()*
-	}
+class Component {
+	#int something
 }
 
-namespace EonInput {
-	class InputControl {
-		+InputControl()
-	}
-	class PlayerInput {
-		+GetKeyboardState()
-	}
-
-	class AI_Input {
-		+GetNextMove()
-	}
+class Entity {
+	#int id = 0
+	#Vector3 position = [0.0, 0.0, 0.0]
+	#Vector~Component~ component
+	+Entity(_id) 
+	+DisplayID()*
 }
 
-namespace EonPhysics {
-	class PhysicsBody {
-		+GetBounds()
-	}
-	
-	class PhysicsControl {
-		+Physics()
-	}
+class InputControl {
+	+InputControl()
 }
 
-namespace EonAudio {
-	class AudioControl {
-		+AudioControl()
-	}
-	
-	class Audio {
-		+Audio()
-	}
+class InputComponent {
+	+InputComponent()
 }
 
-namespace EonRender {
-	class RenderControl {
-		+RenderControl()
-	}
-	
-	class Render {
-		+Render()
-	}
-	
-	class 2DRender {
-		+2DRender()
-	}
+class PlayerInputComponent {
+	+GetKeyboardState()
+}
+
+class AI_InputComponent {
+	+GetNextMove()
+}
+
+class PhysicsComponent {
+	+GetBounds()
+}
+
+class PhysicsControl {
+	+Physics()
+}
+
+class AudioControl {
+	+AudioControl()
+}
+
+class AudioComponent {
+	+AudioComponent()
+}
+
+class RenderControl {
+	+RenderControl()
+}
+
+class RenderComponent {
+	+RenderComponent()
+}
+
+class 2DRenderComponent {
+	+2DRenderComponent()
 }
 ```

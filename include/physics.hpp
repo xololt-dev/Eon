@@ -1,14 +1,25 @@
 #pragma once
 
+#include <glm/glm.hpp>
+
 namespace eon {
 	namespace physics {
-		class Component {
+		class RigidBody {
+
+		};
+
+		class PhysicsComponent : public Component {
 		public:
 			void update();
 
 		private:
-			// Velocity
-			// Acceleration
+			glm::vec3 velocity;			// Velocity
+			glm::vec3 acceleration;		// Acceleration
+			RigidBody rigidBody;
+		};
+
+		class PhysicsManager : public Manager {
+
 		};
 	}
 }

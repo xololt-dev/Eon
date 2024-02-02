@@ -1,19 +1,10 @@
 #pragma once
+
 #include <iostream>
 
 namespace eon {
-	class Entity {
-	public:
-		Entity (int _id) :
-			id(_id) {}
+	class EntityManager : public Manager {
 
-		virtual void displayID()
-			{ std::cout << "Entity ID: " <<  id << "\n"; };
-
-	protected:
-		int id = 0;
-		// position
-		// render
 	};
 
 	class PhysicsEntity : public Entity {
