@@ -533,10 +533,13 @@
     <ClInclude Include="external\imgui\imstb_rectpack.h" />
     <ClInclude Include="external\imgui\imstb_textedit.h" />
     <ClInclude Include="external\imgui\imstb_truetype.h" />
+    <ClInclude Include="include\audio.hpp" />
     <ClInclude Include="include\controls.hpp" />
     <ClInclude Include="include\core.hpp" />
     <ClInclude Include="include\entity.hpp" />
     <ClInclude Include="include\physics.hpp" />
+    <ClInclude Include="include\render.hpp" />
+    <ClInclude Include="include\utils.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="external\glew\glew32.lib" />

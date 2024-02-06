@@ -13,11 +13,7 @@
 #include <physics.hpp>
 #include <controls.hpp>
 
-int main(int argc, char* argv[]) {
-	std::cout << "Hello world!\n";
-	eon::Player e(0);
-	e.displayID();
-	
+int main(int argc, char* argv[]) {	
     // Setup SDL
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0)
     {

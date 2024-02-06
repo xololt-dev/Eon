@@ -1,12 +1,47 @@
 #pragma once
 
+#include <utils.hpp>
+
 #include <iostream>
+#include <vector>
+#include <list>
 
 namespace eon {
-	class EntityManager : public Manager {
+	namespace entity {
+		enum class EntityType {
+			Player,
+			Computer,
+			Dynamic,
+			Static
+		};
 
-	};
+		class Entity {
+		public:
+			Entity(unsigned int a_id) :
+				id(a_id) {}
 
+			virtual void displayID() {
+				std::cout << "Entity ID: " << id << "\n";
+			};
+
+			bool addComponent(Component& a_component);
+
+		protected:
+			unsigned int id = 0;
+			EntityType type;
+			glm::vec3 position = { 0.0f, 0.0f, 0.0f };
+
+			std::list<Component> componentsList;
+		};
+
+		class EntityManager {
+		public:
+
+		protected:
+			std::vector<Entity> entitiesList;
+		};
+	}
+	/*
 	class PhysicsEntity : public Entity {
 	public:
 		PhysicsEntity (int _id) :
@@ -41,4 +76,5 @@ namespace eon {
 	private:
 		// ai imput
 	};
+	*/
 }

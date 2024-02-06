@@ -2,6 +2,8 @@
 
 #include <glm/glm.hpp>
 
+#include <vector>
+
 namespace eon {
 	namespace physics {
 		class RigidBody {

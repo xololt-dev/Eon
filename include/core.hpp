@@ -3,36 +3,31 @@
 #include <iostream>
 #include <vector>
 
+#include <controls.hpp>
+#include <physics.hpp>
+#include <entity.hpp>
+#include <audio.hpp>
+#include <render.hpp>
+
 #include <glm/glm.hpp>
 
 namespace eon {
-	class Component {
+	class SystemsManager {
 	public:
-		int somthing;
-	};
-
-	class Entity {
-	public:
-		Entity(int _id) :
-			id(_id) {}
-
-		virtual void displayID()
-		{
-			std::cout << "Entity ID: " << id << "\n";
-		};
+		void update();
 
 	protected:
-		int id = 0;
-		glm::vec3 position = { 0.0f, 0.0f, 0.0f };
-
-		std::vector<Component> componentsList;
+		controls::ControlsManager controls;
+		physics::PhysicsManager physics;
+		audio::AudioManager audio;
+		render::RenderManager render;
+		entity::EntityManager entities;
 	};
 
-	class Manager {
+	class Engine {
+	public:
 
-	};
-
-	class SystemsManager {
-
+	protected:
+		SystemsManager systemManager;
 	};
 }
