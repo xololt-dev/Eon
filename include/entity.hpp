@@ -1,5 +1,8 @@
 #pragma once
 
+#include "glm/fwd.hpp"
+#include "glm/glm.hpp"
+
 #include <utils.hpp>
 
 #include <iostream>
@@ -9,18 +12,36 @@
 namespace eon {
 	namespace entity {
 		enum class EntityType {
+			Null,
 			Player,
 			Computer,
+			DynamicAudio,
 			Dynamic,
-			Static
+			StaticAudio,
+			Static,
+			Other			
 		};
 
 		class Entity {
 		public:
-			Entity(unsigned int a_id) :
-				id(a_id) {}
+			// Basic Entity constructor
+			Entity(unsigned int a_id, EntityType a_type = EntityType::Null, 
+				glm::vec3 a_position = { 0.0f, 0.0f, 0.0f }) :
+				id(a_id), type(a_type), position(a_position) 
+				{}
 
-			virtual void displayID() {
+			// Entity constructor with components
+			Entity(unsigned int a_id, EntityType a_type, glm::vec3 a_position, 
+				std::vector<Component*> a_components) :
+				id(a_id), type(a_type), position(a_position) {
+				
+				for (Component* comp : a_components)
+					componentsList.push_back(comp);
+			}
+
+			// TODO: Destructor, copy constructor, copy assignment operator
+
+			void displayID() {
 				std::cout << "Entity ID: " << id << "\n";
 			};
 
@@ -31,11 +52,13 @@ namespace eon {
 			EntityType type;
 			glm::vec3 position = { 0.0f, 0.0f, 0.0f };
 
-			std::list<Component> componentsList;
+			std::list<Component*> componentsList;
 		};
 
-		class EntityManager {
+		class Manager {
 		public:
+			size_t getEntitiesAmount()
+				{ return entitiesList.size(); };
 
 		protected:
 			std::vector<Entity> entitiesList;

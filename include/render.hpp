@@ -4,11 +4,11 @@
 
 namespace eon {
 	namespace render {
-		class RenderComponent : public Component {
+		class Component : public eon::Component {
 
 		};
 
-		class RenderManager : public Manager {
+		class Manager : public eon::Manager {
 
 		};
 	}

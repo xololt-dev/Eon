@@ -4,11 +4,11 @@
 
 namespace eon {
 	namespace audio {
-		class AudioComponent : public Component {
+		class Component : public eon::Component {
 
 		};
 
-		class AudioManager : public Manager {
+		class Manager : public eon::Manager {
 
 		};
 	}

@@ -2,21 +2,22 @@
 
 #include <utils.hpp>
 
-#include <glm/glm.hpp>
+#include "glm/glm.hpp"
 
 #include <vector>
 
 namespace eon {
 	namespace controls {
-		class PlayerComponent : public Component {
+		// TODO: PlayerComponent and controls::Manager 
+		class PlayerComponent : public eon::Component {
 
 		};
 
-		class AIComponent : public Component {
+		class AIComponent : public eon::Component {
 
 		};
 
-		class ControlsManager : public Manager {
+		class Manager : public eon::Manager {
 
 		};
 	}

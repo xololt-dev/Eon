@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstddef>
 #include <vector>
 
 namespace eon {
@@ -21,8 +22,9 @@ namespace eon {
 
 	class Manager {
 	public:
-
+		size_t getEntitiesAmount()
+				{ return componentList.size(); };
 	protected:
-		std::vector<Component> componentList;
+		std::vector<Component*> componentList;
 	};
 }
