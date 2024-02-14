@@ -1,3 +1,4 @@
+#include <tuple>
 #define SDL_MAIN_HANDLED
 
 #include <iostream>
@@ -16,7 +17,8 @@
 #include <controls.hpp>
 
 int main(int argc, char* argv[]) {	
-    
+    eon::Engine engine;
+
     // Setup SDL
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0)
     {
@@ -58,7 +60,10 @@ int main(int argc, char* argv[]) {
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
     SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-    SDL_Window* window = SDL_CreateWindow("Dear ImGui SDL2+OpenGL3 example", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, window_flags);
+    SDL_Window* window = SDL_CreateWindow("Dear ImGui SDL2+OpenGL3 example", 
+        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
+        1280, 720, 
+        window_flags);
     if (window == nullptr)
     {
         printf("Error: SDL_CreateWindow(): %s\n", SDL_GetError());
@@ -68,6 +73,23 @@ int main(int argc, char* argv[]) {
     SDL_GLContext gl_context = SDL_GL_CreateContext(window);
     SDL_GL_MakeCurrent(window, gl_context);
     SDL_GL_SetSwapInterval(1); // Enable vsync
+
+    // Wait a bit
+    SDL_Delay(3000);
+    eon::controls::PlayerComponent comp = eon::controls::PlayerComponent();
+
+    SDL_Event event;
+    while (true) {
+        comp.update();
+        std::tuple<short, short> result = comp.getAxisMovement();
+
+        if (std::get<0>(result) != 0 || std::get<1>(result) != 0)
+            std::cout << std::get<0>(result) << " " << std::get<1>(result) << std::endl;
+        
+        SDL_PollEvent( &event );
+        if (event.type == SDL_QUIT)
+            break;
+    }
 
     sleep(10);
 

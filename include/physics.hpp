@@ -14,14 +14,21 @@ namespace eon {
 		public:
 			void update();
 
+			Component() {}
+     		~Component() {}
+     		Component(const Component &other) {}
+
 		private:
 			glm::vec3 velocity = { 0.0f, 0.0f, 0.0f };			// Velocity
 			glm::vec3 acceleration = { 0.0f, 0.0f, 0.0f };		// Acceleration
+			float weight = 1.0f;
 			RigidBody rigidBody;
 		};
 
 		class Manager : public eon::Manager {
 		public:
+			std::shared_ptr<eon::Component> createComponent();
+		
 		protected:
 		};
 	}

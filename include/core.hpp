@@ -22,7 +22,8 @@ namespace eon {
 
 	class Engine {
 	public:
-		 
+		void gameLoop();
+
 	protected:
 		SystemsManager systemManager;
 	};

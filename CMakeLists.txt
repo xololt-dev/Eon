@@ -5,7 +5,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_compile_options(-Wno-c++98-compat -Wno-c++98-compat-pedantic)
 
-project(Eon VERSION 0.1.0 LANGUAGES C CXX)
+project(Eon VERSION 0.1.0.1 LANGUAGES C CXX)
 
 set(SOURCE_DIR   src)
 set(INCLUDE_DIR  include)
@@ -77,7 +77,8 @@ target_include_directories(imgui PUBLIC external/imgui)]]
 ###########
 # Project #
 ###########
-add_executable(${PROJECT_NAME} ${SOURCE_DIR}/main.cpp)
+file(GLOB SOURCES "${SOURCE_DIR}/*.cpp")
+add_executable(${PROJECT_NAME} ${SOURCES})
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} ${GLM_LIBRARIES})#PRIVATE glm::glm)

@@ -57,11 +57,15 @@ namespace eon {
 
 		class Manager {
 		public:
+			void addEntity();
+			void addEntities();
+			void deleteEntity();
+
 			size_t getEntitiesAmount()
 				{ return entitiesList.size(); };
 
 		protected:
-			std::vector<Entity> entitiesList;
+			std::list<Entity> entitiesList; // In future vector, list now for simplicity
 		};
 	}
 	/*

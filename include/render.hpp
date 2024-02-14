@@ -5,11 +5,17 @@
 namespace eon {
 	namespace render {
 		class Component : public eon::Component {
+		public:
+			void update();
 
+			Component() {}
+     		~Component() {}
+     		Component(const Component &other) {}
 		};
 
 		class Manager : public eon::Manager {
-
+		public:
+			std::shared_ptr<eon::Component> createComponent();
 		};
 	}
 }
