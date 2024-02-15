@@ -8,9 +8,11 @@ namespace eon {
 		public:
 			void update();
 			
-			Component() {}
+			Component() {
+				type = ComponentType::Audio;
+			}
      		~Component() {}
-     		Component(const Component &other) {}
+     		Component(const Component &a_other) {}
 		};
 
 		class Manager : public eon::Manager {

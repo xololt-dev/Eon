@@ -76,22 +76,15 @@ int main(int argc, char* argv[]) {
 
     // Wait a bit
     SDL_Delay(3000);
-    eon::controls::PlayerComponent comp = eon::controls::PlayerComponent();
+
+    // Input test
+    eon::controls::Manager manager = eon::controls::Manager();
+    manager.createComponent();
 
     SDL_Event event;
-    while (true) {
-        comp.update();
-        std::tuple<short, short> result = comp.getAxisMovement();
-
-        if (std::get<0>(result) != 0 || std::get<1>(result) != 0)
-            std::cout << std::get<0>(result) << " " << std::get<1>(result) << std::endl;
-        
-        SDL_PollEvent( &event );
-        if (event.type == SDL_QUIT)
-            break;
+    while (!manager.getQuit()) {
+        manager.update();
     }
-
-    sleep(10);
 
     SDL_GL_DeleteContext(gl_context);
     SDL_DestroyWindow(window);

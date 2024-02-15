@@ -14,9 +14,11 @@ namespace eon {
 		public:
 			void update();
 
-			Component() {}
+			Component() {
+				type = ComponentType::Physics;
+			}
      		~Component() {}
-     		Component(const Component &other) {}
+     		Component(const Component &a_other) {}
 
 		private:
 			glm::vec3 velocity = { 0.0f, 0.0f, 0.0f };			// Velocity

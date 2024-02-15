@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <list>
 #include <memory>
+#include <type_traits>
 namespace eon {
 	enum class ComponentType {
 		Player,
@@ -21,7 +22,7 @@ namespace eon {
 
 		Component() {}
      	~Component() {}
-     	Component(const Component &other) {}
+     	Component(const Component &a_other) {}
 
 	protected:
 		ComponentType type;
@@ -37,4 +38,10 @@ namespace eon {
 	protected:
 		std::list<std::shared_ptr<Component>> componentList; // In future vector, list now for simplicity
 	};
+
+	// https://stackoverflow.com/questions/8357240/how-to-automatically-convert-strongly-typed-enum-into-int
+	template <typename E>
+	constexpr auto to_underlying(E a_e) noexcept {
+		return static_cast<std::underlying_type_t<E>>(a_e);
+	}
 }
