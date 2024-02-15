@@ -1,7 +1,7 @@
 #include <entity.hpp>
 
-bool eon::entity::Entity::addComponent(Component& a_component) {
-    this->componentsList.push_back(&a_component);
+bool eon::entity::Entity::addComponent(std::shared_ptr<Component> a_component) {
+    componentsList.push_back(a_component);
     
     return true;
 }

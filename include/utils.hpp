@@ -4,6 +4,7 @@
 #include <list>
 #include <memory>
 #include <type_traits>
+
 namespace eon {
 	enum class ComponentType {
 		Player,
@@ -12,25 +13,34 @@ namespace eon {
 		Render,
 		Audio
 	};
+	namespace entity {
+		class Entity;
+	}
 
 	class Component {
 	public:
 		virtual void update() = 0;
-		ComponentType getType() {
-			return type;
-		}
 
 		Component() {}
      	~Component() {}
      	Component(const Component &a_other) {}
 
+		ComponentType getType() 
+			{ return type; }
+		std::weak_ptr<entity::Entity> getEntity() 
+			{ return entity; }
+
+		void setEntity(std::weak_ptr<entity::Entity> a_entity)
+			{ entity = a_entity; };
+
 	protected:
 		ComponentType type;
+		std::weak_ptr<entity::Entity> entity;
 	};
 
 	class Manager {
 	public:
-		virtual std::shared_ptr<eon::Component> createComponent() = 0;
+		virtual std::shared_ptr<eon::Component> createComponent(ComponentType a_type) = 0;
 		void update();
 
 		size_t getEntitiesAmount()

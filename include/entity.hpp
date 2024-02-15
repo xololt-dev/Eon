@@ -8,6 +8,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <memory>
 
 namespace eon {
 	namespace entity {
@@ -32,11 +33,11 @@ namespace eon {
 
 			// Entity constructor with components
 			Entity(unsigned int a_id, EntityType a_type, glm::vec3 a_position, 
-				std::vector<Component*> a_components) :
+				std::vector<std::shared_ptr<Component>> a_components) :
 				id(a_id), type(a_type), position(a_position) {
 				
-				for (Component* comp : a_components)
-					componentsList.push_back(comp);
+				for (auto comp : a_components)
+					componentsList.push_back(std::move(comp));
 			}
 
 			// TODO: Destructor, copy constructor, copy assignment operator
@@ -45,14 +46,14 @@ namespace eon {
 				std::cout << "Entity ID: " << id << "\n";
 			};
 
-			bool addComponent(Component& a_component);
+			bool addComponent(std::shared_ptr<Component> a_component);
 
 		protected:
 			unsigned int id = 0;
 			EntityType type;
 			glm::vec3 position = { 0.0f, 0.0f, 0.0f };
 
-			std::list<Component*> componentsList;
+			std::list<std::shared_ptr<Component>> componentsList;
 		};
 
 		class Manager {

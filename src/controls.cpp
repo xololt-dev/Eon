@@ -96,7 +96,7 @@ void eon::controls::Manager::update() {
             c->update();
 }
 
-std::shared_ptr<eon::Component> eon::controls::Manager::createComponent() {
+std::shared_ptr<eon::Component> eon::controls::Manager::createComponent(ComponentType a_type) {
     std::shared_ptr<eon::controls::PlayerComponent> newComp(new eon::controls::PlayerComponent()); // = new eon::controls::PlayerComponent();
 
     componentList.push_back(std::move(newComp));

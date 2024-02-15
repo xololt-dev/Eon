@@ -17,7 +17,7 @@ namespace eon {
 
 		class Manager : public eon::Manager {
 		public:
-			std::shared_ptr<eon::Component> createComponent();
+			std::shared_ptr<eon::Component> createComponent(ComponentType a_type);
 		};
 	}
 }

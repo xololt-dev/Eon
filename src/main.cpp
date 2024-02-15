@@ -1,3 +1,4 @@
+#include "utils.hpp"
 #include <tuple>
 #define SDL_MAIN_HANDLED
 
@@ -79,7 +80,7 @@ int main(int argc, char* argv[]) {
 
     // Input test
     eon::controls::Manager manager = eon::controls::Manager();
-    manager.createComponent();
+    manager.createComponent(eon::ComponentType::Player);
 
     SDL_Event event;
     while (!manager.getQuit()) {
