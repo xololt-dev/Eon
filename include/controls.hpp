@@ -35,6 +35,8 @@ namespace eon {
 
 		class AIComponent : public eon::Component {
 		public:
+			void update();
+
 			AIComponent() {
 				type = ComponentType::Computer;
 			}
@@ -44,10 +46,18 @@ namespace eon {
 		protected:
 		};
 
+		template<typename _Tp, typename _Up>
+		inline std::shared_ptr<_Tp>
+		static_pointer_cast(const std::shared_ptr<eon::controls::PlayerComponent>& __r);
+		template<typename _Tp, typename _Up>
+		inline std::shared_ptr<_Tp>
+		static_pointer_cast(const std::shared_ptr<eon::controls::AIComponent>& __r);
+
 		class Manager : public eon::Manager {
 		public:
 			void update();
 			std::shared_ptr<eon::Component> createComponent(ComponentType a_type);
+			void deleteComponent(std::shared_ptr<eon::Component> a_comp);
 
 			void updateKeybinds();
 

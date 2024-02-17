@@ -41,12 +41,16 @@ namespace eon {
 			}
 
 			// TODO: Destructor, copy constructor, copy assignment operator
+			~Entity() {}
+     		Entity(const Entity &a_other) {}
 
 			void displayID() {
 				std::cout << "Entity ID: " << id << "\n";
 			};
 
 			bool addComponent(std::shared_ptr<Component> a_component);
+
+			std::weak_ptr<Component> getComponent(ComponentType a_type);
 
 		protected:
 			unsigned int id = 0;

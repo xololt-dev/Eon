@@ -110,3 +110,10 @@ void eon::controls::Manager::loadKeybinds() {
     keyMap[SDLK_LEFT] = to_underlying(GameKeyActions::Left);
     keyMap[SDLK_RIGHT] = to_underlying(GameKeyActions::Right);
 }
+
+void eon::controls::Manager::deleteComponent(std::shared_ptr<eon::Component> a_comp) {
+    if (a_comp->getType() == ComponentType::Player)
+        componentList.remove(static_pointer_cast<eon::controls::PlayerComponent>(a_comp));
+    else if (a_comp->getType() == ComponentType::Computer)
+        componentList.remove(static_pointer_cast<eon::controls::AIComponent>(a_comp));
+}

@@ -23,3 +23,23 @@ std::shared_ptr<eon::Component> eon::SystemsManager::createComponent(ComponentTy
             break;
     }
 }
+
+void eon::SystemsManager::deleteComponent(std::shared_ptr<controls::PlayerComponent> a_player) {
+    controls.deleteComponent(a_player);
+}
+
+void eon::SystemsManager::deleteComponent(std::shared_ptr<controls::AIComponent> a_computer) {
+    controls.deleteComponent(a_computer);
+}
+
+void eon::SystemsManager::deleteComponent(std::shared_ptr<physics::Component> a_physics) {
+    physics.deleteComponent(a_physics);
+}
+
+void eon::SystemsManager::deleteComponent(std::shared_ptr<audio::Component> a_audio) {
+    audio.deleteComponent(a_audio);
+}
+
+void eon::SystemsManager::deleteComponent(std::shared_ptr<render::Component> a_render) {
+    render.deleteComponent(a_render);
+}

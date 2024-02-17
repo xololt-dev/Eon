@@ -14,6 +14,11 @@ namespace eon {
 	public:
 		void update();
 		std::shared_ptr<Component> createComponent(ComponentType a_type);
+		void deleteComponent(std::shared_ptr<controls::PlayerComponent> a_player);
+		void deleteComponent(std::shared_ptr<controls::AIComponent> a_computer);
+		void deleteComponent(std::shared_ptr<physics::Component> a_physics);
+		void deleteComponent(std::shared_ptr<audio::Component> a_audio);
+		void deleteComponent(std::shared_ptr<render::Component> a_render);
 
 	protected:
 		controls::Manager controls;

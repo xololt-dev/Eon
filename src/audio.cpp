@@ -11,3 +11,7 @@ std::shared_ptr<eon::Component> eon::audio::Manager::createComponent(ComponentTy
 
     return newComp;
 }
+
+void eon::audio::Manager::deleteComponent(std::shared_ptr<eon::Component> a_comp) {
+    componentList.remove(a_comp);
+}

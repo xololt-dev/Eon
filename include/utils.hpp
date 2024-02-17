@@ -40,8 +40,9 @@ namespace eon {
 
 	class Manager {
 	public:
-		virtual std::shared_ptr<eon::Component> createComponent(ComponentType a_type) = 0;
 		void update();
+		virtual std::shared_ptr<eon::Component> createComponent(ComponentType a_type) = 0;
+		virtual void deleteComponent(std::shared_ptr<Component> a_component) = 0;
 
 		size_t getEntitiesAmount()
 				{ return componentList.size(); };
