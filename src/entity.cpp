@@ -1,12 +1,8 @@
+#include "glm/fwd.hpp"
 #include "utils.hpp"
 #include <entity.hpp>
-#include <memory>
 
-bool eon::entity::Entity::addComponent(std::shared_ptr<Component> a_component) {
-    componentsList.push_back(a_component);
-    
-    return true;
-}
+#include <memory>
 
 std::weak_ptr<eon::Component> eon::entity::Entity::getComponent(eon::ComponentType a_type) {
     std::weak_ptr<eon::Component> returnPtr;
@@ -34,7 +30,7 @@ std::weak_ptr<eon::Component> eon::entity::Entity::getComponent(eon::ComponentTy
             break;
     }
 
-    for (auto a : componentsList) {
+    for (std::shared_ptr<Component> a : componentsList) {
         if (a->getType() == a_type) {
             returnPtr = a;
             break;
@@ -44,9 +40,14 @@ std::weak_ptr<eon::Component> eon::entity::Entity::getComponent(eon::ComponentTy
     return returnPtr;
 }
 
-void eon::entity::Manager::addEntity() {
-    // Create components (get vec of components from the SystemManager)
-    // Create entity with those componenets
+std::shared_ptr<eon::entity::Entity> eon::entity::Manager::addEntity(
+    unsigned int a_id, EntityType a_type, glm::vec3 a_position) {
+    // Create entity and return a pointer to it
+    
+    std::shared_ptr<eon::entity::Entity> newEntity = std::make_shared<eon::entity::Entity>(a_id, a_type, a_position); 
+    entitiesList.push_back(newEntity);
+    
+    return newEntity;
 }
 
 void eon::entity::Manager::deleteEntity() {

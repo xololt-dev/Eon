@@ -1,6 +1,7 @@
+#include <memory>
 #include <utils.hpp>
 
 void eon::Manager::update() {
-    for (auto comp : componentList)
+    for (std::shared_ptr<Component> comp : componentList)
         comp->update();
 }

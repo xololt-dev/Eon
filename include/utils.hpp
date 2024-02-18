@@ -13,6 +13,7 @@ namespace eon {
 		Render,
 		Audio
 	};
+
 	namespace entity {
 		class Entity;
 	}
@@ -22,13 +23,14 @@ namespace eon {
 		virtual void update() = 0;
 
 		Component() {}
-     	~Component() {}
+     	virtual ~Component() {}
      	Component(const Component &a_other) {}
 
 		ComponentType getType() 
-			{ return type; }
+			{ return type; };
+			
 		std::weak_ptr<entity::Entity> getEntity() 
-			{ return entity; }
+			{ return entity; };
 
 		void setEntity(std::weak_ptr<entity::Entity> a_entity)
 			{ entity = a_entity; };
@@ -45,7 +47,7 @@ namespace eon {
 		virtual void deleteComponent(std::shared_ptr<Component> a_component) = 0;
 
 		size_t getEntitiesAmount()
-				{ return componentList.size(); };
+			{ return componentList.size(); };
 	protected:
 		std::list<std::shared_ptr<Component>> componentList; // In future vector, list now for simplicity
 	};

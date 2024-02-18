@@ -1,7 +1,9 @@
+#include "controls.hpp"
 #include <core.hpp>
+#include <memory>
 
 void eon::SystemsManager::update() {
-
+    controls.update();
 }
 
 std::shared_ptr<eon::Component> eon::SystemsManager::createComponent(ComponentType a_type) {

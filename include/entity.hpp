@@ -1,9 +1,14 @@
 #pragma once
 
+#include "glm/detail/qualifier.hpp"
 #include "glm/fwd.hpp"
 #include "glm/glm.hpp"
 
+#include "controls.hpp"
+#include "audio.hpp"
 #include <utils.hpp>
+#include "physics.hpp"
+#include "render.hpp"
 
 #include <iostream>
 #include <vector>
@@ -36,7 +41,7 @@ namespace eon {
 				std::vector<std::shared_ptr<Component>> a_components) :
 				id(a_id), type(a_type), position(a_position) {
 				
-				for (auto comp : a_components)
+				for (std::shared_ptr<Component> comp : a_components)
 					componentsList.push_back(std::move(comp));
 			}
 
@@ -48,9 +53,27 @@ namespace eon {
 				std::cout << "Entity ID: " << id << "\n";
 			};
 
-			bool addComponent(std::shared_ptr<Component> a_component);
-
+			void addComponent(std::shared_ptr<eon::controls::PlayerComponent> a_component, ComponentType a_type)
+				{ componentsList.push_back(a_component); };
+			void addComponent(std::shared_ptr<eon::controls::AIComponent> a_component, ComponentType a_type)
+				{ componentsList.push_back(a_component); };
+			void addComponent(std::shared_ptr<eon::physics::Component> a_component, ComponentType a_type)
+				{ componentsList.push_back(a_component); };
+			void addComponent(std::shared_ptr<eon::audio::Component> a_component, ComponentType a_type)
+				{ componentsList.push_back(a_component); };
+			void addComponent(std::shared_ptr<eon::render::Component> a_component, ComponentType a_type)
+				{ componentsList.push_back(a_component); };
 			std::weak_ptr<Component> getComponent(ComponentType a_type);
+			unsigned int getId()
+				{ return id; };
+			void setType(EntityType a_type)
+				{ type = a_type; };
+			EntityType getType()
+				{ return type; };
+			void setPosition(glm::vec3 a_pos)
+				{ position = a_pos; };
+			glm::vec3 getPosition()
+				{ return position; };
 
 		protected:
 			unsigned int id = 0;
@@ -62,7 +85,9 @@ namespace eon {
 
 		class Manager {
 		public:
-			void addEntity();
+			std::shared_ptr<eon::entity::Entity> addEntity(
+				unsigned int a_id, EntityType a_type = EntityType::Null, 
+				glm::vec3 a_position = { 0.0f, 0.0f, 0.0f });
 			void addEntities();
 			void deleteEntity();
 
@@ -70,7 +95,7 @@ namespace eon {
 				{ return entitiesList.size(); };
 
 		protected:
-			std::list<Entity> entitiesList; // In future vector, list now for simplicity
+			std::list<std::shared_ptr<Entity>> entitiesList; // In future vector, list now for simplicity
 		};
 	}
 	/*

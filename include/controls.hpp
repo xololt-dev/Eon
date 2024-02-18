@@ -19,14 +19,17 @@ namespace eon {
 		class PlayerComponent : public eon::Component {
 		public:
 			void update();
-			std::tuple<short, short> getAxisMovement() 
-				{ return std::make_tuple(xAxis, yAxis); }
 
 			PlayerComponent() {
 				type = ComponentType::Player;
 			}
      		~PlayerComponent() {}
      		PlayerComponent(const PlayerComponent &a_other) {}
+
+			ComponentType getType()
+				{ return type; };
+			std::tuple<short, short> getAxisMovement() 
+				{ return std::make_tuple(xAxis, yAxis); }
 
 		protected:
 			short xAxis = 0;

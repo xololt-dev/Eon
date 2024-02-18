@@ -1,4 +1,6 @@
 #include "utils.hpp"
+#include <memory>
+#include <ostream>
 #include <tuple>
 #define SDL_MAIN_HANDLED
 
@@ -79,14 +81,38 @@ int main(int argc, char* argv[]) {
     SDL_Delay(3000);
 
     // Input test
+    /*
     eon::controls::Manager manager = eon::controls::Manager();
     manager.createComponent(eon::ComponentType::Player);
+    */
+    std::unique_ptr<eon::SystemsManager> sm = std::make_unique<eon::SystemsManager>();
+    std::unique_ptr<eon::entity::Manager> entMan = std::make_unique<eon::entity::Manager>();
+
+    std::shared_ptr<eon::entity::Entity> entity = entMan->addEntity(0, eon::entity::EntityType::Player);
+    std::shared_ptr<eon::controls::PlayerComponent> player = 
+        std::static_pointer_cast<eon::controls::PlayerComponent>
+        (sm->createComponent(eon::ComponentType::Player));
+    
+    std::cout << player.use_count() << std::endl;
+    
+    entity->addComponent(player, player->getType());
+    std::cout << player.use_count() << std::endl;
+    player->setEntity(entity);
+    entity.reset();
+
+    std::cout << player.use_count() << std::endl;
 
     SDL_Event event;
-    while (!manager.getQuit()) {
-        manager.update();
+    while (!sm->getQuit()) {//manager.getQuit()) {
+        sm->update();
     }
 
+    sm.reset();
+    entMan.reset();
+    
+    player.reset();
+    std::cout << (player.get() == nullptr) << std::endl;
+    
     SDL_GL_DeleteContext(gl_context);
     SDL_DestroyWindow(window);
     SDL_Quit();

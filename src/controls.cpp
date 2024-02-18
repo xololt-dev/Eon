@@ -1,7 +1,8 @@
+#include <SDL2/SDL.h>
 #include "SDL_events.h"
 #include "SDL_keycode.h"
-#include "utils.hpp"
-#include <SDL2/SDL.h>
+
+#include <utils.hpp>
 #include <controls.hpp>
 
 #include <memory>
@@ -97,9 +98,10 @@ void eon::controls::Manager::update() {
 }
 
 std::shared_ptr<eon::Component> eon::controls::Manager::createComponent(ComponentType a_type) {
-    std::shared_ptr<eon::controls::PlayerComponent> newComp(new eon::controls::PlayerComponent()); // = new eon::controls::PlayerComponent();
+    std::shared_ptr<eon::controls::PlayerComponent> newComp = 
+        std::make_shared<eon::controls::PlayerComponent>();
 
-    componentList.push_back(std::move(newComp));
+    componentList.push_back(newComp);
 
     return newComp;
 }
