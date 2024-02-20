@@ -1,11 +1,9 @@
-#include "utils.hpp"
-#include <memory>
-#include <ostream>
-#include <tuple>
 #define SDL_MAIN_HANDLED
 
 #include <iostream>
 #include <unistd.h>
+#include <memory>
+#include <ostream>
 /*
 #include <external/imgui/imgui.h>
 #include <external/imgui/imgui_impl_sdl2.h>
@@ -18,13 +16,11 @@
 #include <entity.hpp>
 #include <physics.hpp>
 #include <controls.hpp>
+#include <utils.hpp>
 
-int main(int argc, char* argv[]) {	
-    eon::Engine engine;
-
+int main(int argc, char* argv[]) {
     // Setup SDL
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0)
-    {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_GAMECONTROLLER) != 0) {
         printf("Error: %s\n", SDL_GetError());
         return -1;
     }
@@ -67,8 +63,7 @@ int main(int argc, char* argv[]) {
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
         1280, 720, 
         window_flags);
-    if (window == nullptr)
-    {
+    if (window == nullptr) {
         printf("Error: SDL_CreateWindow(): %s\n", SDL_GetError());
         return -1;
     }
@@ -81,10 +76,6 @@ int main(int argc, char* argv[]) {
     SDL_Delay(3000);
 
     // Input test
-    /*
-    eon::controls::Manager manager = eon::controls::Manager();
-    manager.createComponent(eon::ComponentType::Player);
-    */
     std::unique_ptr<eon::SystemsManager> sm = std::make_unique<eon::SystemsManager>();
     std::unique_ptr<eon::entity::Manager> entMan = std::make_unique<eon::entity::Manager>();
 
@@ -103,14 +94,14 @@ int main(int argc, char* argv[]) {
     std::cout << player.use_count() << std::endl;
 
     SDL_Event event;
-    while (!sm->getQuit()) {//manager.getQuit()) {
+    while (!sm->getQuit()) {
         sm->update();
     }
 
     sm.reset();
     entMan.reset();
-    
     player.reset();
+    
     std::cout << (player.get() == nullptr) << std::endl;
     
     SDL_GL_DeleteContext(gl_context);

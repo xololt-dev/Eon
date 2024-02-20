@@ -38,7 +38,7 @@ namespace eon {
 
 			// Entity constructor with components
 			Entity(unsigned int a_id, EntityType a_type, glm::vec3 a_position, 
-				std::vector<std::shared_ptr<Component>> a_components) :
+				std::vector<std::shared_ptr<Component>>& a_components) :
 				id(a_id), type(a_type), position(a_position) {
 				
 				for (std::shared_ptr<Component> comp : a_components)

@@ -5,7 +5,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_compile_options(-Wno-c++98-compat -Wno-c++98-compat-pedantic)
 
-project(Eon VERSION 0.1.0.1 LANGUAGES C CXX)
+project(Eon VERSION 0.1.0.2 LANGUAGES C CXX)
 
 set(SOURCE_DIR   src)
 set(INCLUDE_DIR  include)

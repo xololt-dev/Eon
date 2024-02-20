@@ -36,6 +36,7 @@ namespace eon {
 			{ entity = a_entity; };
 
 	protected:
+		unsigned int id = 0;
 		ComponentType type;
 		std::weak_ptr<entity::Entity> entity;
 	};
@@ -46,7 +47,7 @@ namespace eon {
 		virtual std::shared_ptr<eon::Component> createComponent(ComponentType a_type) = 0;
 		virtual void deleteComponent(std::shared_ptr<Component> a_component) = 0;
 
-		size_t getEntitiesAmount()
+		size_t getComponentsAmount()
 			{ return componentList.size(); };
 	protected:
 		std::list<std::shared_ptr<Component>> componentList; // In future vector, list now for simplicity

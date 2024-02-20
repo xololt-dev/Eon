@@ -1,89 +1,210 @@
 ```mermaid
 ---
-title: ECS
+title: Eon ECS
 ---
 classDiagram
-	Eon <-- Entity
-	Eon <-- PhysicsControl
-	Eon <-- AudioControl
-	Eon <-- RenderControl
-	Eon <-- InputControl
+	SystemsManager <-- PhysicsManager
+	SystemsManager <-- AudioManager
+	SystemsManager <-- RenderManager
+	SystemsManager <-- ControlsManager
+	EntityManager <-- Entity
+	
+	Component <|-- AIComponent
+	Component <|-- PlayerComponent
 	Component <|-- AudioComponent
 	Component <|-- PhysicsComponent
 	Component <|-- RenderComponent
-	Component <|-- InputComponent
-	PhysicsControl <-- PhysicsComponent
-	AudioControl <-- AudioComponent
-	RenderControl <-- RenderComponent
-	Entity o-- InputComponent
-	Eon o-- InputComponent
-	InputComponent <|-- PlayerInputComponent
-	InputComponent <|-- AI_InputComponent
-	InputControl <-- InputComponent
-	Entity o-- RenderComponent
-	Eon o-- RenderComponent
-	RenderComponent <|-- 2DRenderComponent
-	Entity o-- AudioComponent
-	Eon o-- AudioComponent
-	Entity o-- PhysicsComponent
+	Manager <|-- ControlsManager
+	Manager <|-- AudioManager
+	Manager <|-- PhysicsManager
+	Manager <|-- RenderManager
 	
-class Eon {
-	#string info
+	ControlsManager <-- PlayerComponent
+	ControlsManager <-- AIComponent
+	PhysicsManager <-- PhysicsComponent
+	AudioManager <-- AudioComponent
+	RenderManager <-- RenderComponent
+	
+	Entity o-- Component
+
+class SystemsManager {
+	#physics::Manager physicsManager
+	#controls::Manager inputManager	
+	#audio::Manager audioManager
+	#render::Manager renderManager
+
+	+update()
+	+createComponent(a_type) shared_ptr~Component~
+	+deleteComponent(a_component)
+	+getQuit() bool
+}
+
+class ComponentType {
+	<<enum>>
+	Player
+	Computer
+	Physics
+	Render
+	Audio
 }
 
 class Component {
-	#int something
+	#unsigned int id
+	#ComponentType type
+	#weak_ptr~Entity~ entity
+
+	+update()*
+
+	+Component()
+	+~Component()*
+	+Component(a_other)
+
+	+getType() ComponentType
+	+getEntity() weak_ptr~Entity~
+	+setEntity(a_entity)
 }
 
-class Entity {
-	#int id = 0
-	#Vector3 position = [0.0, 0.0, 0.0]
-	#Vector~Component~ component
-	+Entity(_id) 
-	+DisplayID()*
+class Manager {
+	#list~shared_ptr~Component~~ componentList
+
+	+update()
+	+createComponent(a_type)*
+	+deleteComponent(a_component)*
+
+	+getComponentsAmount() size_t
 }
 
-class InputControl {
-	+InputControl()
+namespace entity {
+	class EntityType {
+		<<enum>>
+		Null
+		Player
+		Computer
+		DynamicAudio
+		Dynamic
+		StaticAudio
+		Static
+		Other
+	}
+	
+	class Entity {
+		#unsigned int id
+		#EntityType type
+		#glm::vec3 position
+		#list~shared_ptr~Component~~ component
+		
+		+displayID()
+		
+		+Entity(a_id, a_type, a_position)
+		+Entity(a_id, a_type, a_position, a_components)
+		+~Entity()
+		+Entity(a_other)
+		
+		+addComponent(a_component)
+		+getComponent(a_type) weak_ptr~Component~
+		+getId() unsigned int
+		+setType(a_type)
+		+getType() EntityType
+		+setPosition(a_pos)
+		+getPosition() glm::vec3
+	}
+
+	class EntityManager {
+		#list~shared_ptr~Entity~~ entitiesList
+
+		+addEntity(a_id, a_type, a_position)
+		+addEntities()
+		+deleteEntity()
+
+		+getEntitiesAmount() size_t
+	}
 }
 
-class InputComponent {
-	+InputComponent()
+namespace controls {
+	class GameKeyActions {
+		Up
+		Down
+		Left
+		Right
+	}
+	 
+	class PlayerComponent {
+		#short xAxis
+		#short yAxis
+
+		+update()
+		
+		+PlayerComponent()
+		+~PlayerComponent()
+		+PlayerComponent(a_other)
+
+		+getType() ComponentType
+		+getAxisMovement() tuple~short, short~
+	}
+
+	class AIComponent {
+		+update()
+
+		+AIComponent()
+		+~AIComponent()
+		+AIComponent(a_other)
+	}
+
+	class ControlsManager {
+		#map~SDL_Keycode, int~ keyMap
+		#bool quit
+		
+		+update()
+		+createComponent(a_type) shared_ptr~Component~
+		+deleteComponent(a_comp)
+		+updateKeybinds()
+		#loadKeybinds()
+		
+		+Manager()
+		+~Manager()
+		+Manager(a_other)
+
+		+getQuit() bool
+	}
 }
 
-class PlayerInputComponent {
-	+GetKeyboardState()
+namespace physics {
+	class PhysicsComponent {
+		-glm::vec3 velocity
+		-glm::vec3 acceleration
+		-float mass
+
+		+update()
+		
+		+Component()
+		+~Component()
+		+Component(a_other)
+		
+		-getUserInput() tuple~short, short~
+	}
+
+	class PhysicsManager {
+		+PhysicsManager()
+	}
 }
 
-class AI_InputComponent {
-	+GetNextMove()
+namespace audio {
+	class AudioComponent {
+		+AudioComponent()
+	}
+	
+	class AudioManager {
+		+AudioManager()
+	}
 }
 
-class PhysicsComponent {
-	+GetBounds()
-}
-
-class PhysicsControl {
-	+Physics()
-}
-
-class AudioControl {
-	+AudioControl()
-}
-
-class AudioComponent {
-	+AudioComponent()
-}
-
-class RenderControl {
-	+RenderControl()
-}
-
-class RenderComponent {
-	+RenderComponent()
-}
-
-class 2DRenderComponent {
-	+2DRenderComponent()
+namespace render {
+	class RenderComponent {
+		+RenderComponent()
+	}
+	
+	class RenderManager {
+		+RenderManager()
+	}
 }
 ```

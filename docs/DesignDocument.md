@@ -14,16 +14,21 @@ Side project that hopefully helps me improve my skills as a developer.
 ### Platform
 - Windows
 - Linux
-### Architecture
+#### Architecture
 - x86
-### Programming language
+### Tools
+#### Programming language
 - C++ ( $\geq$ 14)
-### Graphics backend
-- OpenGL
-
+- OpenGL (via SDL)
+#### Software
+- VS Code
+- CMake
+- SDL2
+- GoogleTest
+- GLM
 ## Developement timeline
 - [ ] Software project phase:
-	- [ ] Main systems sketch
+	- [x] Main systems sketch (pre 2024)
 - [ ] Implementation:
 	- [ ] Entity system
 	- [ ] UI
@@ -34,7 +39,7 @@ Side project that hopefully helps me improve my skills as a developer.
 	- [ ] Audio
 		- [ ] Stereo
 	- [ ] Input
-		- [ ] Keyboard & Mouse
+		- [x] Keyboard & Mouse (~10.02.2024)
 		- [ ] Controller
 	- [ ] Graphics
 		- [ ] Still images
