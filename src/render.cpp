@@ -1,13 +1,15 @@
+#include <memory>
 #include <render.hpp>
 
-void eon::render::Component::update() {
+void eon::render::TextureComponent::update() {
 
 }
 
 std::shared_ptr<eon::Component> eon::render::Manager::createComponent(ComponentType a_type) {
-    std::shared_ptr<eon::render::Component> newComp(new eon::render::Component()); // = new eon::controls::PlayerComponent();
+    std::shared_ptr<eon::render::Component> newComp = 
+        std::make_shared<eon::render::TextureComponent>();
 
-    componentList.push_back(std::move(newComp));
+    componentList.push_back(newComp);
 
     return newComp;
 }
