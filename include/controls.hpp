@@ -61,6 +61,7 @@ namespace eon {
 			void update();
 			std::shared_ptr<eon::Component> createComponent(ComponentType a_type);
 			void deleteComponent(std::shared_ptr<eon::Component> a_comp);
+			std::tuple<short, short> getAxisMovement();
 
 			void updateKeybinds();
 

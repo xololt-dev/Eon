@@ -2,6 +2,7 @@
 #include "SDL_events.h"
 #include "SDL_keycode.h"
 
+#include <tuple>
 #include <utils.hpp>
 #include <controls.hpp>
 
@@ -118,4 +119,13 @@ void eon::controls::Manager::deleteComponent(std::shared_ptr<eon::Component> a_c
         componentList.remove(static_pointer_cast<eon::controls::PlayerComponent>(a_comp));
     else if (a_comp->getType() == ComponentType::Computer)
         componentList.remove(static_pointer_cast<eon::controls::AIComponent>(a_comp));
+}
+
+std::tuple<short, short> eon::controls::Manager::getAxisMovement() {
+    for (std::shared_ptr<eon::Component> comp : componentList) {
+        if (comp->getType() == ComponentType::Player)
+            return static_pointer_cast<eon::controls::PlayerComponent>(comp)->getAxisMovement();
+    }
+    
+    return std::make_tuple(0, 0);
 }

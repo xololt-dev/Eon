@@ -11,6 +11,7 @@
 */
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
+#include <SDL2/SDL_render.h>
 
 #include <core.hpp>
 #include <entity.hpp>
@@ -58,18 +59,7 @@ int main(int argc, char* argv[]) {
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
-    SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-    SDL_Window* window = SDL_CreateWindow("Dear ImGui SDL2+OpenGL3 example", 
-        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
-        1280, 720, 
-        window_flags);
-    if (window == nullptr) {
-        printf("Error: SDL_CreateWindow(): %s\n", SDL_GetError());
-        return -1;
-    }
 
-    SDL_GLContext gl_context = SDL_GL_CreateContext(window);
-    SDL_GL_MakeCurrent(window, gl_context);
     SDL_GL_SetSwapInterval(1); // Enable vsync
 
     // Wait a bit
@@ -104,8 +94,6 @@ int main(int argc, char* argv[]) {
     
     std::cout << (player.get() == nullptr) << std::endl;
     
-    SDL_GL_DeleteContext(gl_context);
-    SDL_DestroyWindow(window);
     SDL_Quit();
 
     return 0;
