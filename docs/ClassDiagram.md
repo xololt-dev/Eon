@@ -8,23 +8,29 @@ classDiagram
 	SystemsManager <-- RenderManager
 	SystemsManager <-- ControlsManager
 	EntityManager <-- Entity
-	
+
+	Texture <|-- PNGTexture
+
 	Component <|-- AIComponent
 	Component <|-- PlayerComponent
 	Component <|-- AudioComponent
 	Component <|-- PhysicsComponent
 	Component <|-- RenderComponent
+	RenderComponent <|-- TextureComponent
+
 	Manager <|-- ControlsManager
 	Manager <|-- AudioManager
 	Manager <|-- PhysicsManager
 	Manager <|-- RenderManager
-	
+
 	ControlsManager <-- PlayerComponent
 	ControlsManager <-- AIComponent
 	PhysicsManager <-- PhysicsComponent
 	AudioManager <-- AudioComponent
 	RenderManager <-- RenderComponent
-	
+
+	TextureComponent o-- Texture
+
 	Entity o-- Component
 
 class SystemsManager {
@@ -72,6 +78,22 @@ class Manager {
 	+deleteComponent(a_component)*
 
 	+getComponentsAmount() size_t
+}
+
+class Texture {
+	#unique_ptr~SDL_Surface~ surface
+	
+	+load(a_path)*
+	+free()*
+}
+
+class PNGTexture {
+	+load(a_path)
+	+free()
+
+	+PNGTexture(a_path)
+	+~PNGTexture()
+	+PNGTexture(a_other)
 }
 
 namespace entity {
@@ -122,6 +144,7 @@ namespace entity {
 
 namespace controls {
 	class GameKeyActions {
+		<<enum>>
 		Up
 		Down
 		Left
@@ -202,9 +225,35 @@ namespace render {
 	class RenderComponent {
 		+RenderComponent()
 	}
+
+	class TextureComponent {
+		#unique_ptr~Texture~ texture
+		
+		+update()
+		
+		+TextureComponent()
+		+TextureComponent(a_path)
+		+~TextureComponent()
+		+TextureComponent(a_other)
+
+		+setTexture(a_path)
+	}
 	
 	class RenderManager {
+		#SDL_Window* window
+		#SDL_Renderer* renderer
+		#SDL_GLContext glContext
+
+		+update()
+		+createComponent(a_type) shared_ptr~Component~
+		+deleteComponent(a_comp)
+		
 		+RenderManager()
+		+RenderManager(a_title, a_width, a_height, a_flags)
+		+~RenderManager()
+		+RenderManager(a_other)
+
+		+setRenderDrawColor(a_red, a_green, a_blue, a_alpha)
 	}
 }
 ```

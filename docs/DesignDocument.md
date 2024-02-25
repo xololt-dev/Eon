@@ -41,6 +41,7 @@ Side project that hopefully helps me improve my skills as a developer.
 	- [ ] Input
 		- [x] Keyboard & Mouse (~10.02.2024)
 		- [ ] Controller
+		- [ ] Bindings settings
 	- [ ] Graphics
 		- [ ] Still images
 		- [ ] Video
