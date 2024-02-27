@@ -2,12 +2,21 @@
 #include "SDL_events.h"
 #include "SDL_keycode.h"
 
-#include <tuple>
 #include <utils.hpp>
 #include <controls.hpp>
+#include <entity.hpp>
+#include "physics.hpp"
 
 #include <memory>
 #include <iostream>
+#include <tuple>
+
+void eon::controls::MovementCommand::execute() {
+    std::shared_ptr<eon::physics::Component> physics = std::static_pointer_cast<eon::physics::Component>
+        (srcEntity->getComponent(ComponentType::Physics));
+    
+    physics->includeMovement({xAxis, yAxis, 0.0f});
+}
 
 // TODO: Proper controls handling (currently one button at the time for some reason)
 
@@ -116,15 +125,15 @@ void eon::controls::Manager::loadKeybinds() {
 
 void eon::controls::Manager::deleteComponent(std::shared_ptr<eon::Component> a_comp) {
     if (a_comp->getType() == ComponentType::Player)
-        componentList.remove(static_pointer_cast<eon::controls::PlayerComponent>(a_comp));
+        componentList.remove(std::static_pointer_cast<eon::controls::PlayerComponent>(a_comp));
     else if (a_comp->getType() == ComponentType::Computer)
-        componentList.remove(static_pointer_cast<eon::controls::AIComponent>(a_comp));
+        componentList.remove(std::static_pointer_cast<eon::controls::AIComponent>(a_comp));
 }
 
 std::tuple<short, short> eon::controls::Manager::getAxisMovement() {
     for (std::shared_ptr<eon::Component> comp : componentList) {
         if (comp->getType() == ComponentType::Player)
-            return static_pointer_cast<eon::controls::PlayerComponent>(comp)->getAxisMovement();
+            return std::static_pointer_cast<eon::controls::PlayerComponent>(comp)->getAxisMovement();
     }
     
     return std::make_tuple(0, 0);

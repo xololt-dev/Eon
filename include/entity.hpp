@@ -63,7 +63,7 @@ namespace eon {
 				{ componentsList.push_back(a_component); };
 			void addComponent(std::shared_ptr<eon::render::Component> a_component, ComponentType a_type)
 				{ componentsList.push_back(a_component); };
-			std::weak_ptr<Component> getComponent(ComponentType a_type);
+			std::shared_ptr<Component> getComponent(ComponentType a_type);
 			unsigned int getId()
 				{ return id; };
 			void setType(EntityType a_type)
@@ -72,6 +72,8 @@ namespace eon {
 				{ return type; };
 			void setPosition(glm::vec3 a_pos)
 				{ position = a_pos; };
+			void offsetPosition(glm::vec3 a_offset) 
+				{ position += a_offset; };
 			glm::vec3 getPosition()
 				{ return position; };
 

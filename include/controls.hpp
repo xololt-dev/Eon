@@ -1,10 +1,12 @@
 #pragma once
 
 #include "SDL_keycode.h"
+
 #include <utils.hpp>
 
 #include <tuple>
 #include <map>
+#include <memory>
 
 namespace eon {
 	namespace controls {
@@ -13,6 +15,26 @@ namespace eon {
 			Down,
 			Left,
 			Right
+		};
+
+		class MovementCommand : public eon::Command {
+		public:
+			void execute();
+
+			MovementCommand(short a_xAxis, short a_yAxis) :
+				xAxis(a_xAxis), yAxis(a_yAxis) 
+				{}
+			MovementCommand(short a_xAxis, short a_yAxis, 
+				std::shared_ptr<eon::entity::Entity> a_srcEntity) :
+				xAxis(a_xAxis), yAxis(a_yAxis) {
+					srcEntity = a_srcEntity;
+			}
+			~MovementCommand() {}
+			MovementCommand(const MovementCommand& a_other) {}
+
+		protected:
+			short xAxis = 0,
+				  yAxis = 0;
 		};
 
 		// TODO: PlayerComponent and controls::Manager 
@@ -49,12 +71,14 @@ namespace eon {
 		protected:
 		};
 
+		/*
 		template<typename _Tp, typename _Up>
 		inline std::shared_ptr<_Tp>
 		static_pointer_cast(const std::shared_ptr<eon::controls::PlayerComponent>& __r);
 		template<typename _Tp, typename _Up>
 		inline std::shared_ptr<_Tp>
 		static_pointer_cast(const std::shared_ptr<eon::controls::AIComponent>& __r);
+		*/
 
 		class Manager : public eon::Manager {
 		public:
