@@ -1,12 +1,19 @@
 #include <SDL2/SDL_image.h>
 #include "SDL_surface.h"
+
+#include <utils.hpp>
+#include <systems_manager.hpp>
+
 #include <cstddef>
 #include <memory>
-#include <utils.hpp>
 
 void eon::Manager::update() {
     for (std::shared_ptr<Component> comp : componentList)
         comp->update();
+}
+
+void eon::Manager::sendCommand(std::shared_ptr<eon::Command>& a_command) {
+    systemsManager->update();
 }
 
 void eon::PNGTexture::load(std::string a_path) {

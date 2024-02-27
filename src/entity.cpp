@@ -4,8 +4,8 @@
 
 #include <memory>
 
-std::weak_ptr<eon::Component> eon::entity::Entity::getComponent(eon::ComponentType a_type) {
-    std::weak_ptr<eon::Component> returnPtr;
+std::shared_ptr<eon::Component> eon::entity::Entity::getComponent(eon::ComponentType a_type) {
+    std::shared_ptr<eon::Component> returnPtr;
 
     switch (a_type) {
         case ComponentType::Player:

@@ -18,6 +18,7 @@
 #include <physics.hpp>
 #include <controls.hpp>
 #include <utils.hpp>
+#include <systems_manager.hpp>
 
 int main(int argc, char* argv[]) {
     // Setup SDL

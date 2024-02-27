@@ -3,11 +3,11 @@
 title: Eon ECS
 ---
 classDiagram
-	SystemsManager <-- PhysicsManager
-	SystemsManager <-- AudioManager
-	SystemsManager <-- RenderManager
-	SystemsManager <-- ControlsManager
-	EntityManager <-- Entity
+	SystemsManager -- PhysicsManager
+	SystemsManager -- AudioManager
+	SystemsManager -- RenderManager
+	SystemsManager -- ControlsManager
+	EntityManager -- Entity
 
 	Texture <|-- PNGTexture
 
@@ -32,6 +32,7 @@ classDiagram
 	TextureComponent o-- Texture
 
 	Entity o-- Component
+	Manager o-- Component
 
 class SystemsManager {
 	#physics::Manager physicsManager
@@ -58,6 +59,7 @@ class Component {
 	#unsigned int id
 	#ComponentType type
 	#weak_ptr~Entity~ entity
+	#weak_ptr~Manager~ manager
 
 	+update()*
 
@@ -71,13 +73,23 @@ class Component {
 }
 
 class Manager {
+	#shared_ptr~SystemsManager~ systemsManager
 	#list~shared_ptr~Component~~ componentList
+	#list~shared_ptr~Command~~ commandsPending
 
 	+update()
 	+createComponent(a_type)*
 	+deleteComponent(a_component)*
 
 	+getComponentsAmount() size_t
+}
+
+class Command {
+	#shared_ptr~Entity~ srcEntity
+
+	+void execute()*
+
+	+~Command()*
 }
 
 class Texture {
