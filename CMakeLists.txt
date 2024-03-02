@@ -23,6 +23,7 @@ include(FetchContent)
 enable_testing()
 add_subdirectory(external/googletest-1.14.0)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+include(GoogleTest)
 
 ##########
 # OpenGL #
@@ -38,10 +39,6 @@ include_directories(${SDL2_INCLUDE_DIRS})
 
 find_package(SDL2_IMAGE REQUIRED)
 include_directories(${SDL2_IMAGE_INCLUDE_DIR})
-
-# find_package(SDL_image REQUIRED)
-# include_directories(${SDL_IMAGE_INCLUDE_DIRS})
-# target_link_libraries(<executable-target> SDL2_image::SDL2_image)
 
 #######
 # GLM #
@@ -92,6 +89,20 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARY})
 target_link_libraries(${PROJECT_NAME} ${GLM_LIBRARIES})#PRIVATE glm::glm)
 target_include_directories(${PROJECT_NAME} PUBLIC ${INCLUDE_DIR})
+
+########
+# Test #
+########
+add_executable(
+  hello_test
+  tests/hello_test.cc
+)
+target_link_libraries(
+  hello_test
+  GTest::gtest_main
+)
+gtest_discover_tests(hello_test)
+# add_test(hello_test hello_test)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
