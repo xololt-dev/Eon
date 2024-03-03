@@ -14,9 +14,9 @@
 #include <SDL2/SDL_render.h>
 
 #include <core.hpp>
-#include <entity.hpp>
-#include <physics.hpp>
-#include <controls.hpp>
+#include <entity/entity.hpp>
+#include <physics/physics.hpp>
+#include <controls/controls.hpp>
 #include <utils.hpp>
 #include <systems_manager.hpp>
 
@@ -63,12 +63,9 @@ int main(int argc, char* argv[]) {
 
     SDL_GL_SetSwapInterval(1); // Enable vsync
 
-    // Wait a bit
-    SDL_Delay(3000);
-
     // Input test
-    std::unique_ptr<eon::SystemsManager> sm = std::make_unique<eon::SystemsManager>();
-    std::unique_ptr<eon::entity::Manager> entMan = std::make_unique<eon::entity::Manager>();
+    std::shared_ptr<eon::SystemsManager> sm = std::make_shared<eon::SystemsManager>();
+    std::unique_ptr<eon::entity::Manager> entMan = std::make_unique<eon::entity::Manager>(sm.get());
 
     std::shared_ptr<eon::entity::Entity> entity = entMan->addEntity(0, eon::entity::EntityType::Player);
     std::shared_ptr<eon::controls::PlayerComponent> player = 

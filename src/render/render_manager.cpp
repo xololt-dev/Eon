@@ -1,10 +1,6 @@
-#include "SDL_render.h"
-#include <memory>
-#include <render.hpp>
-
-void eon::render::TextureComponent::update() {
-
-}
+#include "render/render_manager.hpp"
+#include "render/render_component.hpp"
+#include "render/texture_component.hpp"
 
 void eon::render::Manager::update() {
     SDL_RenderClear(renderer);

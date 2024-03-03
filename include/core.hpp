@@ -1,10 +1,10 @@
 #pragma once
 
-#include <controls.hpp>
-#include <physics.hpp>
-#include <entity.hpp>
-#include <audio.hpp>
-#include <render.hpp>
+#include <controls/controls.hpp>
+#include <physics/physics.hpp>
+#include <entity/entity.hpp>
+#include <audio/audio.hpp>
+#include <render/render.hpp>
 
 namespace eon {
 	class Engine {

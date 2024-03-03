@@ -12,7 +12,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 set(SOURCE_DIR   src)
 set(INCLUDE_DIR  include)
 set(LIBRARIES_DIR   external)
-#set(EON_LIBRARIES   glm)
 
 # include(CTest)
 include(FetchContent)
@@ -83,7 +82,7 @@ target_include_directories(imgui PUBLIC external/imgui)]]
 ###########
 # Project #
 ###########
-file(GLOB SOURCES "${SOURCE_DIR}/*.cpp")
+file(GLOB SOURCES "${SOURCE_DIR}/*.cpp" "${SOURCE_DIR}/*/*.cpp")
 add_executable(${PROJECT_NAME} ${SOURCES})
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARY})
