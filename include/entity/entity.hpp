@@ -1,14 +1,14 @@
 #pragma once
 
-#include "glm/detail/qualifier.hpp"
-#include "glm/fwd.hpp"
-#include "glm/glm.hpp"
+#include <glm/glm.hpp>
 
-#include "controls.hpp"
-#include "audio.hpp"
-#include <utils.hpp>
-#include "physics.hpp"
-#include "render.hpp"
+#include "controls/player_component.hpp"
+#include "controls/ai_component.hpp"
+#include "audio/audio_component.hpp"
+#include "physics/physics_component.hpp"
+#include "render/render_component.hpp"
+
+#include "entity_type.hpp"
 
 #include <iostream>
 #include <vector>
@@ -17,17 +17,6 @@
 
 namespace eon {
 	namespace entity {
-		enum class EntityType {
-			Null,
-			Player,
-			Computer,
-			DynamicAudio,
-			Dynamic,
-			StaticAudio,
-			Static,
-			Other			
-		};
-
 		class Entity {
 		public:
 			// Basic Entity constructor
@@ -41,7 +30,7 @@ namespace eon {
 				std::vector<std::shared_ptr<Component>>& a_components) :
 				id(a_id), type(a_type), position(a_position) {
 				
-				for (std::shared_ptr<Component> comp : a_components)
+				for (std::shared_ptr<Component>& comp : a_components)
 					componentsList.push_back(std::move(comp));
 			}
 
@@ -84,56 +73,5 @@ namespace eon {
 
 			std::list<std::shared_ptr<Component>> componentsList;
 		};
-
-		class Manager {
-		public:
-			std::shared_ptr<eon::entity::Entity> addEntity(
-				unsigned int a_id, EntityType a_type = EntityType::Null, 
-				glm::vec3 a_position = { 0.0f, 0.0f, 0.0f });
-			void addEntities();
-			void deleteEntity();
-
-			size_t getEntitiesAmount()
-				{ return entitiesList.size(); };
-
-		protected:
-			std::list<std::shared_ptr<Entity>> entitiesList; // In future vector, list now for simplicity
-		};
 	}
-	/*
-	class PhysicsEntity : public Entity {
-	public:
-		PhysicsEntity (int _id) :
-			Entity(_id) {}
-
-		void displayID() 
-			{ std::cout << "PhysicsEntity ID: " << id << "\n"; };
-
-	protected:
-		// physics
-	};
-
-	class Player : public PhysicsEntity {
-	public:
-		Player (int _id) :
-			PhysicsEntity (_id) {}
-
-		void displayID() 
-			{ std::cout << "Player ID: " << id << "\n"; };
-
-	private:
-		// player input
-	};
-
-	class Zombie : public PhysicsEntity {
-	public:
-		Zombie(int _id) :
-			PhysicsEntity(_id) {}
-
-		void displayID()
-			{ std::cout << "Zombie ID: " << id << "\n"; };
-	private:
-		// ai imput
-	};
-	*/
 }

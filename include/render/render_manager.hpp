@@ -1,51 +1,16 @@
 #pragma once
 
-#include "SDL_render.h"
-#include "SDL_stdinc.h"
-#include "SDL_video.h"
-#include <string>
-#include <utils.hpp>
-
 #include <SDL2/SDL.h>
 
+#include "component.hpp"
+#include "manager.hpp"
+
 #include <memory>
+#include <string>
 
 namespace eon {
-	namespace render {
-		class Component : public eon::Component {
-		public:
-			virtual void update() = 0;
-
-			Component() {
-				type = ComponentType::Render;
-			}
-     		~Component() {}
-     		Component(const Component &a_other) {}
-		};
-
-		template<typename _Tp, typename _Up>
-		inline std::shared_ptr<_Tp>
-		static_pointer_cast(const std::shared_ptr<eon::render::Component>& __r);
-
-		class TextureComponent : public render::Component {
-		public:
-			void update();
-
-			TextureComponent() {}
-			TextureComponent(std::string a_path) {
-				texture->load(a_path);
-			}
-			~TextureComponent() {}
-			TextureComponent(const Component &a_other) {}
-
-			void setTexture(std::string a_path) 
-				{ texture->load(a_path); };
-
-		protected:
-			std::unique_ptr<Texture> texture;
-		};
-
-		class Manager : public eon::Manager {
+    namespace render {
+        class Manager : public eon::Manager {
 		public:
 			void update();
 			std::shared_ptr<eon::Component> createComponent(ComponentType a_type);
@@ -110,5 +75,5 @@ namespace eon {
 			SDL_Renderer* renderer;
 			SDL_GLContext glContext;
 		};
-	}
+    }
 }

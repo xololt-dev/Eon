@@ -1,26 +1,16 @@
-#include <SDL2/SDL.h>
-#include "SDL_events.h"
-#include "SDL_keycode.h"
+#include <SDL_keycode.h>
+#include <SDL_events.h>
 
-#include <utils.hpp>
-#include <controls.hpp>
-#include <entity.hpp>
-#include "physics.hpp"
+#include "controls/player_component.hpp"
+#include "controls/movement_command.hpp"
+#include "manager.hpp"
 
-#include <memory>
 #include <iostream>
-#include <tuple>
-
-void eon::controls::MovementCommand::execute() {
-    std::shared_ptr<eon::physics::Component> physics = std::static_pointer_cast<eon::physics::Component>
-        (srcEntity->getComponent(ComponentType::Physics));
-    
-    physics->includeMovement({xAxis, yAxis, 0.0f});
-}
 
 // TODO: Proper controls handling (currently one button at the time for some reason)
-
 void eon::controls::PlayerComponent::update() {
+    std::cout << "PlayerComponent update\n";
+
     SDL_Event event;
     // Screen coordinates change
     short xAxisChange = 0, 
@@ -90,51 +80,10 @@ void eon::controls::PlayerComponent::update() {
     // yAxisChange;
     xAxis = xAxisChange;
     yAxis = yAxisChange;
-}
-
-void eon::controls::Manager::update() {
-    SDL_Event event;
-
-    SDL_PumpEvents();
-    // If quit event
-    if (SDL_PeepEvents(NULL,0,SDL_PEEKEVENT,SDL_QUIT,SDL_QUIT) > 0) {
-        quit = true;
-        return;
-    }
-
-    for (auto c : componentList)
-        if (c->getType() == ComponentType::Player)
-            c->update();
-}
-
-std::shared_ptr<eon::Component> eon::controls::Manager::createComponent(ComponentType a_type) {
-    std::shared_ptr<eon::controls::PlayerComponent> newComp = 
-        std::make_shared<eon::controls::PlayerComponent>();
-
-    componentList.push_back(newComp);
-
-    return newComp;
-}
-
-void eon::controls::Manager::loadKeybinds() {
-    keyMap[SDLK_UP] = to_underlying(GameKeyActions::Up);
-    keyMap[SDLK_DOWN] = to_underlying(GameKeyActions::Down);
-    keyMap[SDLK_LEFT] = to_underlying(GameKeyActions::Left);
-    keyMap[SDLK_RIGHT] = to_underlying(GameKeyActions::Right);
-}
-
-void eon::controls::Manager::deleteComponent(std::shared_ptr<eon::Component> a_comp) {
-    if (a_comp->getType() == ComponentType::Player)
-        componentList.remove(std::static_pointer_cast<eon::controls::PlayerComponent>(a_comp));
-    else if (a_comp->getType() == ComponentType::Computer)
-        componentList.remove(std::static_pointer_cast<eon::controls::AIComponent>(a_comp));
-}
-
-std::tuple<short, short> eon::controls::Manager::getAxisMovement() {
-    for (std::shared_ptr<eon::Component> comp : componentList) {
-        if (comp->getType() == ComponentType::Player)
-            return std::static_pointer_cast<eon::controls::PlayerComponent>(comp)->getAxisMovement();
-    }
     
-    return std::make_tuple(0, 0);
+    std::shared_ptr<MovementCommand> command = std::make_shared<MovementCommand>(xAxis, yAxis, entity);
+    std::shared_ptr<Command> sendCommand = command;
+    std::cout << "Command to be sent\n";
+    manager.lock()->sendCommand(sendCommand);
+    std::cout << "Command sent\n";
 }

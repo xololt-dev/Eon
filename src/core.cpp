@@ -1,5 +1,3 @@
-#include "controls.hpp"
-// #include <core.hpp>
 #include <systems_manager.hpp>
 
 #include <memory>
@@ -42,8 +40,21 @@ void eon::SystemsManager::update() {
             render.setRenderDrawColor(0x00, 0xFF, 0xFF, 0xFF);
         }
     }
-    
+
     render.update();
+
+    /*
+    // Update entities - probably beginning (think about intermediate update) 
+
+    // Atleast at the beginning & potential for each/once every x physics updates 
+    controls.update();
+    // Atleast once & can get looped
+    physics.update();
+    // Most likely once is enough (I mean... audio update every ~16 - 33ms is pretty dang good already)
+    audio.update();
+    // Once - maybe alternate inside update function between different types
+    render.update();
+    */
 }
 
 std::shared_ptr<eon::Component> eon::SystemsManager::createComponent(ComponentType a_type) {
@@ -84,4 +95,18 @@ void eon::SystemsManager::deleteComponent(std::shared_ptr<audio::Component> a_au
 
 void eon::SystemsManager::deleteComponent(std::shared_ptr<render::Component> a_render) {
     render.deleteComponent(a_render);
+}
+
+void eon::SystemsManager::sendCommand(std::shared_ptr<Command>& a_command) {
+    CommandType currentType = a_command->getType();
+
+    switch (currentType) {
+        case CommandType::Movement:
+            physics.addCommand(a_command);
+            break;
+        case CommandType::Collision:
+        case CommandType::Displacement:
+            entities->addCommand(a_command);
+            break;
+    }
 }

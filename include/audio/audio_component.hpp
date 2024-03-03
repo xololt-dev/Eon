@@ -1,6 +1,7 @@
 #pragma once
 
-#include <utils.hpp>
+#include "component.hpp"
+#include "enums.hpp"
 
 namespace eon {
 	namespace audio {
@@ -14,11 +15,5 @@ namespace eon {
      		~Component() {}
      		Component(const Component &a_other) {}
 		};
-
-		class Manager : public eon::Manager {
-		public:
-			std::shared_ptr<eon::Component> createComponent(ComponentType a_type);
-			void deleteComponent(std::shared_ptr<eon::Component> a_comp);
-		};
-	}
+    }
 }
