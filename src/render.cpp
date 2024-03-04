@@ -1,13 +1,25 @@
+#include "SDL_render.h"
+#include <memory>
 #include <render.hpp>
 
-void eon::render::Component::update() {
+void eon::render::TextureComponent::update() {
 
 }
 
-std::shared_ptr<eon::Component> eon::render::Manager::createComponent(ComponentType a_type) {
-    std::shared_ptr<eon::render::Component> newComp(new eon::render::Component()); // = new eon::controls::PlayerComponent();
+void eon::render::Manager::update() {
+    SDL_RenderClear(renderer);
 
-    componentList.push_back(std::move(newComp));
+    for (std::shared_ptr<eon::Component> comp : componentList)
+        comp->update();
+
+    SDL_RenderPresent(renderer);
+} 
+
+std::shared_ptr<eon::Component> eon::render::Manager::createComponent(ComponentType a_type) {
+    std::shared_ptr<eon::render::Component> newComp = 
+        std::make_shared<eon::render::TextureComponent>();
+
+    componentList.push_back(newComp);
 
     return newComp;
 }

@@ -7,6 +7,8 @@ add_compile_options(-Wno-c++98-compat -Wno-c++98-compat-pedantic)
 
 project(Eon VERSION 0.1.0.2 LANGUAGES C CXX)
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
+
 set(SOURCE_DIR   src)
 set(INCLUDE_DIR  include)
 set(LIBRARIES_DIR   external)
@@ -33,6 +35,13 @@ include_directories(${OPENGL_INCLUDE_DIRS})
 ########
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
+
+find_package(SDL2_IMAGE REQUIRED)
+include_directories(${SDL2_IMAGE_INCLUDE_DIR})
+
+# find_package(SDL_image REQUIRED)
+# include_directories(${SDL_IMAGE_INCLUDE_DIRS})
+# target_link_libraries(<executable-target> SDL2_image::SDL2_image)
 
 #######
 # GLM #
@@ -80,7 +89,7 @@ target_include_directories(imgui PUBLIC external/imgui)]]
 file(GLOB SOURCES "${SOURCE_DIR}/*.cpp")
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARY})
 target_link_libraries(${PROJECT_NAME} ${GLM_LIBRARIES})#PRIVATE glm::glm)
 target_include_directories(${PROJECT_NAME} PUBLIC ${INCLUDE_DIR})
 
