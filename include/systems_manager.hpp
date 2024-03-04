@@ -7,10 +7,13 @@
 #include "physics/physics_manager.hpp"
 #include "physics/physics_component.hpp"
 #include "entity/entity_manager.hpp"
+#include "entity/entity_type.hpp"
 #include "audio/audio_manager.hpp"
 #include "render/render_manager.hpp"
 
 #include <memory>
+#include <atomic>
+#include <vector>
 
 namespace eon {
     class Component;
@@ -19,6 +22,11 @@ namespace eon {
     class SystemsManager {
 	public:
 		void update();
+
+		unsigned long long createEntity(unsigned long long a_id, 
+			entity::EntityType a_type = entity::EntityType::Null, 
+			glm::vec3 a_position = { 0.0f, 0.0f, 0.0f });
+		
 		std::shared_ptr<Component> createComponent(ComponentType a_type);
 
 		void deleteComponent(std::shared_ptr<controls::PlayerComponent> a_player);
@@ -30,17 +38,26 @@ namespace eon {
 		void sendCommand(std::shared_ptr<Command>& a_command);
 
 		SystemsManager() {
-			entities = std::make_unique<entity::Manager>(this);
+			// NOTE: For now entities manager is a special case - potential TODO
+			entities.setSystemsManager(this);
+
+			std::vector<eon::Manager*> managers = {&controls, &physics, &audio, &render};
+			for (eon::Manager* m : managers)
+				m->setSystemsManager(this);
 		}
 
 		bool getQuit()
 			{ return controls.getQuit(); };
+		unsigned long long getNextID()
+			{ return nextID++; };
 
 	protected:
+		static std::atomic_ullong nextID;							// Do we wanna use "slug"s too? (human-readable, unique identifier)
+		
 		controls::Manager controls;
 		physics::Manager physics;
 		audio::Manager audio;
 		render::Manager render;
-		std::unique_ptr<entity::Manager> entities;
+		entity::Manager entities;
 	};
 }

@@ -16,7 +16,7 @@ namespace eon {
             void update();
 
             std::shared_ptr<eon::entity::Entity> addEntity(
-                unsigned int a_id, EntityType a_type = EntityType::Null, 
+                unsigned long long a_id, EntityType a_type = EntityType::Null, 
                 glm::vec3 a_position = { 0.0f, 0.0f, 0.0f });
             void addEntities();
             void deleteEntity();
@@ -25,11 +25,9 @@ namespace eon {
                 { commandsPending.push_back(a_command); }
             void sendCommand(std::shared_ptr<eon::Command>& a_command);
 
-            // Manager() {}
-            Manager(SystemsManager* a_sysManager) {
-                systemsManager = a_sysManager;
-            }
-
+            void setSystemsManager(SystemsManager* a_sysManager) 
+                { systemsManager = a_sysManager; };
+            
             size_t getEntitiesAmount()
                 { return entitiesList.size(); };
 

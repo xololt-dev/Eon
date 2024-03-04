@@ -65,7 +65,8 @@ int main(int argc, char* argv[]) {
 
     // Input test
     std::shared_ptr<eon::SystemsManager> sm = std::make_shared<eon::SystemsManager>();
-    std::unique_ptr<eon::entity::Manager> entMan = std::make_unique<eon::entity::Manager>(sm.get());
+    std::unique_ptr<eon::entity::Manager> entMan = std::make_unique<eon::entity::Manager>();
+    entMan->setSystemsManager(sm.get());
 
     std::shared_ptr<eon::entity::Entity> entity = entMan->addEntity(0, eon::entity::EntityType::Player);
     std::shared_ptr<eon::controls::PlayerComponent> player = 

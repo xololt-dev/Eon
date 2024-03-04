@@ -4,6 +4,7 @@
 #include "controls/player_component.hpp"
 #include "controls/ai_component.hpp"
 #include "controls/game_key_actions.hpp"
+#include "systems_manager.hpp"
 #include "utils.hpp"
 
 #include <iostream>
