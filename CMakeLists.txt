@@ -3,9 +3,9 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_compile_options(-Wno-c++98-compat -Wno-c++98-compat-pedantic)
+# add_compile_options(-Wno-c++98-compat -Wno-c++98-compat-pedantic) not needed with GLM 1.0.1
 
-project(Eon VERSION 0.1.0.2 LANGUAGES C CXX)
+project(Eon VERSION 0.1.0.4 LANGUAGES C CXX)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
@@ -45,7 +45,7 @@ include_directories(${SDL2_IMAGE_INCLUDE_DIR})
 FetchContent_Declare(
 	glm
 	GIT_REPOSITORY	https://github.com/g-truc/glm.git
-	GIT_TAG 	33b0eb9fa336ffd8551024b1d2690e418014553b  #refs/tags/1.0.0.0 #bf71a834948186f4097caa076cd2663c69a10e1e #refs/tags/0.9.9.8
+	GIT_TAG 	0af55ccecd98d4e5a8d1fad7de25ba429d60e863 #refs/tags/1.0.1.0 33b0eb9fa336ffd8551024b1d2690e418014553b refs/tags/1.0.0.0
 )
 FetchContent_MakeAvailable(glm)
 set(GLM_LIBRARIES   glm::glm)

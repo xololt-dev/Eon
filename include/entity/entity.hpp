@@ -20,13 +20,13 @@ namespace eon {
 		class Entity {
 		public:
 			// Basic Entity constructor
-			Entity(unsigned int a_id, EntityType a_type = EntityType::Null, 
+			Entity(unsigned long long a_id, EntityType a_type = EntityType::Null, 
 				glm::vec3 a_position = { 0.0f, 0.0f, 0.0f }) :
 				id(a_id), type(a_type), position(a_position) 
 				{}
 
 			// Entity constructor with components
-			Entity(unsigned int a_id, EntityType a_type, glm::vec3 a_position, 
+			Entity(unsigned long long a_id, EntityType a_type, glm::vec3 a_position, 
 				std::vector<std::shared_ptr<Component>>& a_components) :
 				id(a_id), type(a_type), position(a_position) {
 				
@@ -67,7 +67,7 @@ namespace eon {
 				{ return position; };
 
 		protected:
-			unsigned int id = 0;
+			unsigned long long id = 0;
 			EntityType type;
 			glm::vec3 position = { 0.0f, 0.0f, 0.0f };
 

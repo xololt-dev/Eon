@@ -24,8 +24,11 @@ namespace eon {
 		size_t getComponentsAmount()
 			{ return componentList.size(); };
 
+		void setSystemsManager(SystemsManager* a_sysManager) 
+			{ systemsManager = a_sysManager; };
+
 	protected:
-		std::weak_ptr<SystemsManager> systemsManager;
+		SystemsManager* systemsManager;
 		std::list<std::shared_ptr<Component>> componentList; 	// In future vector, list now for simplicity
 		std::list<std::shared_ptr<Command>> commandsPending;	// Same as above
 	};

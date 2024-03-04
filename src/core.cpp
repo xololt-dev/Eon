@@ -3,6 +3,8 @@
 #include <memory>
 #include <tuple>
 
+std::atomic_ullong eon::SystemsManager::nextID{0};
+
 void eon::SystemsManager::update() {
     controls.update();
     std::tuple<short, short> t = controls.getAxisMovement();
@@ -106,7 +108,7 @@ void eon::SystemsManager::sendCommand(std::shared_ptr<Command>& a_command) {
             break;
         case CommandType::Collision:
         case CommandType::Displacement:
-            entities->addCommand(a_command);
+            entities.addCommand(a_command);
             break;
     }
 }

@@ -27,7 +27,7 @@ namespace eon {
 			{ entity = a_entity; };
 
 	protected:
-		unsigned int id = 0;
+		unsigned long long id = 0;
 		ComponentType type;
 		std::weak_ptr<entity::Entity> entity;
 		std::weak_ptr<eon::Manager> manager;
