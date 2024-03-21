@@ -28,6 +28,7 @@ namespace eon {
 			glm::vec3 a_position = { 0.0f, 0.0f, 0.0f });
 		
 		std::shared_ptr<Component> createComponent(ComponentType a_type);
+		std::shared_ptr<Component> createComponent(ComponentType a_type, unsigned long long a_id);
 
 		void deleteComponent(std::shared_ptr<controls::PlayerComponent> a_player);
 		void deleteComponent(std::shared_ptr<controls::AIComponent> a_computer);
@@ -38,6 +39,7 @@ namespace eon {
 		void sendCommand(std::shared_ptr<Command>& a_command);
 
 		SystemsManager() {
+			std::cout << "[INFO] Created SystemsManager\n";
 			// NOTE: For now entities manager is a special case - potential TODO
 			entities.setSystemsManager(this);
 

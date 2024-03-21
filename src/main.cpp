@@ -19,6 +19,8 @@
 #include <controls/controls.hpp>
 #include <utils.hpp>
 #include <systems_manager.hpp>
+#include <entity/entity_type.hpp>
+#include <enums.hpp>
 
 int main(int argc, char* argv[]) {
     // Setup SDL
@@ -65,33 +67,48 @@ int main(int argc, char* argv[]) {
 
     // Input test
     std::shared_ptr<eon::SystemsManager> sm = std::make_shared<eon::SystemsManager>();
+    
+    /*
     std::unique_ptr<eon::entity::Manager> entMan = std::make_unique<eon::entity::Manager>();
     entMan->setSystemsManager(sm.get());
+    */
 
+    unsigned long long ent_ID = sm->createEntity(
+        sm->getNextID(), eon::entity::EntityType::Player);
+    
+    sm->createComponent(eon::ComponentType::Player, ent_ID);
+
+    /*
     std::shared_ptr<eon::entity::Entity> entity = entMan->addEntity(0, eon::entity::EntityType::Player);
     std::shared_ptr<eon::controls::PlayerComponent> player = 
         std::static_pointer_cast<eon::controls::PlayerComponent>
         (sm->createComponent(eon::ComponentType::Player));
-    
+     
     std::cout << player.use_count() << std::endl;
     
     entity->addComponent(player, player->getType());
     std::cout << player.use_count() << std::endl;
     player->setEntity(entity);
     entity.reset();
-
+    
     std::cout << player.use_count() << std::endl;
+    */
 
-    SDL_Event event;
+    // TODO: get the loop working again
+    
     while (!sm->getQuit()) {
         sm->update();
     }
+    
 
     sm.reset();
+    /*
     entMan.reset();
     player.reset();
     
     std::cout << (player.get() == nullptr) << std::endl;
+    */
+    std::cout << (sm.get() == nullptr) << std::endl;
     
     SDL_Quit();
 

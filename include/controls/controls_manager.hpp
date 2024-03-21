@@ -1,11 +1,14 @@
 #pragma once
 
-#include "SDL_keycode.h"
+// #include "SDL_keycode.h"
+
+#include <SDL2/SDL_keycode.h>
 
 #include "manager.hpp"
 #include "enums.hpp"
 
 #include <map>
+#include <iostream>
 
 namespace eon {
     namespace controls {
@@ -19,6 +22,12 @@ namespace eon {
 			void updateKeybinds();
 
 			Manager() {
+				std::cout << "[INFO] Created ControlsManager\n";
+				loadKeybinds();
+			}
+			Manager(SystemsManager& a_sysManager) {
+				std::cout << "[INFO] Created ControlsManager\n";
+				setSystemsManager(&a_sysManager);
 				loadKeybinds();
 			}
 			~Manager() {}
