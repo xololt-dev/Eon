@@ -20,6 +20,8 @@ namespace eon {
                 glm::vec3 a_position = { 0.0f, 0.0f, 0.0f });
             void addEntities();
             void deleteEntity();
+
+            void addComponent(std::shared_ptr<eon::Component> a_component, unsigned long long a_id);
             
             void addCommand(std::shared_ptr<eon::Command>& a_command) 
                 { commandsPending.push_back(a_command); }

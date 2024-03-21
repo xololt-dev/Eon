@@ -17,5 +17,5 @@ void eon::Manager::update() {
 
 void eon::Manager::sendCommand(std::shared_ptr<eon::Command>& a_command) {
     std::cout << "sendCommand\n";
-    systemsManager.lock()->sendCommand(a_command);
+    systemsManager->sendCommand(a_command);
 }

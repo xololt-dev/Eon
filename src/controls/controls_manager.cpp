@@ -1,4 +1,5 @@
-#include "SDL_events.h"
+#include <SDL2/SDL_events.h>
+// #include "SDL_events.h"
 
 #include "controls/controls_manager.hpp"
 #include "controls/player_component.hpp"

@@ -1,5 +1,5 @@
-#include <SDL_keycode.h>
-#include <SDL_events.h>
+#include <SDL2/SDL_keycode.h>
+#include <SDL2/SDL_events.h>
 
 #include "controls/player_component.hpp"
 #include "controls/movement_command.hpp"
