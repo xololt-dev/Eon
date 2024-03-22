@@ -5,6 +5,7 @@
 #include "command.hpp"
 #include "controls/movement_command.hpp"
 #include "manager.hpp"
+#include "render/render_draw_color_command.hpp"
 
 #include <iostream>
 #include <memory>
@@ -88,4 +89,44 @@ void eon::controls::PlayerComponent::update() {
     std::cout << "Command to be sent\n" << command.get() << "\n";
     manager->sendCommand(sendCommand);
     std::cout << "Command sent\n";
+
+    if (xAxis == 0 && yAxis == 0)
+        return;
+
+    std::shared_ptr<render::RenderDrawColorCommand> command2 = nullptr;
+    if (xAxis == 0) {
+        if (yAxis == 0) {
+            // render.setRenderDrawColor(0xFF, 0xFF, 0xFF, 0xFF);
+        }
+        else if (yAxis > 0) {
+            command2 = std::make_shared<render::RenderDrawColorCommand>(0xFF, 0x00, 0x00, 0xFF);
+        }
+        else {
+            command2 = std::make_shared<render::RenderDrawColorCommand>(0x00, 0xFF, 0x00, 0xFF);
+        }
+    }
+    else if (xAxis > 0) {
+        if (yAxis == 0) {
+            command2 = std::make_shared<render::RenderDrawColorCommand>(0xFF, 0xA5, 0x00, 0xFF);
+        }
+        else if (yAxis > 0) {
+            command2 = std::make_shared<render::RenderDrawColorCommand>(0xFF, 0x8C, 0x00, 0xFF);
+        }
+        else {
+            command2 = std::make_shared<render::RenderDrawColorCommand>(0xFF, 0xFF, 0x00, 0xFF);
+        }
+    }
+    else {
+        if (yAxis== 0) {
+            command2 = std::make_shared<render::RenderDrawColorCommand>(0x00, 0x00, 0x7F, 0xFF);
+        }
+        else if (yAxis > 0) {
+            command2 = std::make_shared<render::RenderDrawColorCommand>(0x7F, 0x00, 0x7F, 0xFF);
+        }
+        else {
+            command2 = std::make_shared<render::RenderDrawColorCommand>(0x00, 0xFF, 0xFF, 0xFF);
+        }
+    }
+    std::shared_ptr<Command> sendCommand2 = std::static_pointer_cast<eon::Command>(command2);
+    manager->sendCommand(sendCommand2);
 }

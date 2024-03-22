@@ -1,11 +1,17 @@
 #include "render/render_manager.hpp"
+#include "command.hpp"
 #include "render/render_component.hpp"
 #include "render/texture_component.hpp"
+
+#include <memory>
 
 void eon::render::Manager::update() {
     SDL_RenderClear(renderer);
 
-    for (std::shared_ptr<eon::Component> comp : componentList)
+    for (std::shared_ptr<Command>& command : commandsPending)
+        command->execute();
+
+    for (std::shared_ptr<eon::Component>& comp : componentList)
         comp->update();
 
     SDL_RenderPresent(renderer);

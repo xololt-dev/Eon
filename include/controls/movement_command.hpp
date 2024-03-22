@@ -26,6 +26,7 @@ namespace eon {
 		protected:
 			short xAxis = 0,
 				  yAxis = 0;
+			std::weak_ptr<eon::entity::Entity> srcEntity;
 		};
     }
 }

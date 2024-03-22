@@ -14,7 +14,8 @@ namespace eon {
 	enum class CommandType {
 		Movement,
 		Collision,
-		Displacement
+		Displacement,
+		RenderDrawColorCommand
 	};
 
 	static std::string getComponentTypeString(ComponentType a_type) {

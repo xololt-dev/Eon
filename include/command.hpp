@@ -1,9 +1,6 @@
 #pragma once
 
-#include "component.hpp"
 #include "enums.hpp"
-
-#include <memory>
 
 namespace eon {
     namespace entity {
@@ -22,6 +19,5 @@ namespace eon {
 
 	protected:
 		CommandType type;
-		std::weak_ptr<eon::entity::Entity> srcEntity;
 	};
 }

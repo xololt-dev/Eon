@@ -8,6 +8,18 @@
 
 #include <memory>
 
+void eon::entity::Manager::update() {
+    // Execute commands
+    for (std::shared_ptr<eon::Command>& c : commandsPending)
+        c->execute();    
+    
+    commandsPending.clear();
+
+    // Update ent
+    //for (std::shared_ptr<Entity>& entities : entitiesList)
+    //    entities->setPosition(entities->getPosition())
+}
+
 // TODO: Think about return values - should they be (shared) ptrs or IDs?
 std::shared_ptr<eon::entity::Entity> eon::entity::Manager::addEntity(
     unsigned long long a_id, EntityType a_type, glm::vec3 a_position) {

@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 
 #include "command.hpp"
+#include "enums.hpp"
 
 #include <memory>
 
@@ -20,12 +21,14 @@ namespace eon {
 				std::weak_ptr<eon::entity::Entity> a_srcEntity) :
 				displacement(a_displacement) {
 					srcEntity = a_srcEntity;
+					type = CommandType::Displacement;
 			}
 			~DisplacementCommand() {}
 			DisplacementCommand(const DisplacementCommand& a_other) {}
 
 		protected:
 			glm::vec3 displacement = { 0.0f, 0.0f, 0.0f };
+			std::weak_ptr<eon::entity::Entity> srcEntity;
 		};
     }
 }

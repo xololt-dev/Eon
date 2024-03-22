@@ -1,7 +1,7 @@
+#include "render/render_draw_color_command.hpp"
 #include <systems_manager.hpp>
 
 #include <memory>
-#include <tuple>
 
 std::atomic_ullong eon::SystemsManager::nextID{0};
 
@@ -9,43 +9,15 @@ void eon::SystemsManager::update() {
     std::cout << "PreControls update\n";
     controls->update();
     std::cout << "PostControls update\n";
-    std::tuple<short, short> t = controls->getAxisMovement();
-    
-    if (std::get<0>(t) == 0) {
-        if (std::get<1>(t) == 0) {
-            // render.setRenderDrawColor(0xFF, 0xFF, 0xFF, 0xFF);
-        }
-        else if (std::get<1>(t) > 0) {
-            render->setRenderDrawColor(0xFF, 0x00, 0x00, 0xFF);
-        }
-        else {
-            render->setRenderDrawColor(0x00, 0xFF, 0x00, 0xFF);
-        }
-    }
-    else if (std::get<0>(t) > 0) {
-        if (std::get<1>(t) == 0) {
-            render->setRenderDrawColor(0xFF, 0xA5, 0x00, 0xFF);
-        }
-        else if (std::get<1>(t) > 0) {
-            render->setRenderDrawColor(0xFF, 0x8C, 0x00, 0xFF);
-        }
-        else {
-            render->setRenderDrawColor(0xFF, 0xFF, 0x00, 0xFF);
-        }
-    }
-    else {
-        if (std::get<1>(t) == 0) {
-            render->setRenderDrawColor(0x00, 0x00, 0x7F, 0xFF);
-        }
-        else if (std::get<1>(t) > 0) {
-            render->setRenderDrawColor(0x7F, 0x00, 0x7F, 0xFF);
-        }
-        else {
-            render->setRenderDrawColor(0x00, 0xFF, 0xFF, 0xFF);
-        }
-    }
-
+    std::cout << "PrePhysics update\n";
+    physics->update();
+    std::cout << "PostPhysics update\n";
+    std::cout << "PreEntity update\n";
+    entities->update();
+    std::cout << "PostEntity update\n";
+    std::cout << "PreRender update\n";
     render->update();
+    std::cout << "PostRender update\n";
 
     /*
     // Update entities - probably beginning (think about intermediate update) 
@@ -145,5 +117,10 @@ void eon::SystemsManager::sendCommand(const std::shared_ptr<Command>& a_command)
         case CommandType::Displacement:
             entities->addCommand(a_command);
             break;
-    }
+        case CommandType::RenderDrawColorCommand:
+            std::static_pointer_cast<eon::render::RenderDrawColorCommand>(a_command)
+                ->setManager(*render.get());
+            render->addCommand(a_command);
+            break;
+        }
 }
