@@ -1,5 +1,7 @@
 # Change Log
 
+## 0.1.0.4:
+- Internal communication done by commands
 ## 0.1.0.2:
 - Creating & deleting components
 - Creating & deleting entities
