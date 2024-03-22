@@ -15,7 +15,8 @@ void eon::Manager::update() {
         comp->update();
 }
 
-void eon::Manager::sendCommand(std::shared_ptr<eon::Command>& a_command) {
-    std::cout << "sendCommand\n";
+void eon::Manager::sendCommand(const std::shared_ptr<eon::Command>& a_command) {
+    std::cout << "sendCommand " << a_command.use_count() << "\n" << a_command << "\n";
+    // << systemsManager << "\n";
     systemsManager->sendCommand(a_command);
 }

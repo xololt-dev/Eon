@@ -2,9 +2,9 @@
 #include "audio/audio_component.hpp"
 
 std::shared_ptr<eon::Component> eon::audio::Manager::createComponent(ComponentType a_type) {
-    std::shared_ptr<eon::audio::Component> newComp(new eon::audio::Component());
+    std::shared_ptr<eon::audio::Component> newComp(new eon::audio::Component(this));
 
-    componentList.push_back(std::move(newComp));
+    componentList.push_back(newComp);
 
     return newComp;
 }

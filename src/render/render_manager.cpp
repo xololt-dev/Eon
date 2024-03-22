@@ -12,8 +12,8 @@ void eon::render::Manager::update() {
 } 
 
 std::shared_ptr<eon::Component> eon::render::Manager::createComponent(ComponentType a_type) {
-    std::shared_ptr<eon::render::Component> newComp = 
-        std::make_shared<eon::render::TextureComponent>();
+    std::shared_ptr<eon::render::Component> newComp (new eon::render::TextureComponent(this));
+        //std::make_shared<eon::render::TextureComponent>();
 
     componentList.push_back(newComp);
 
@@ -21,5 +21,5 @@ std::shared_ptr<eon::Component> eon::render::Manager::createComponent(ComponentT
 }
 
 void eon::render::Manager::deleteComponent(std::shared_ptr<eon::Component> a_comp) {
-    componentList.remove(static_pointer_cast<eon::render::Component>(a_comp));
+    componentList.remove(std::static_pointer_cast<eon::render::Component>(a_comp));
 }

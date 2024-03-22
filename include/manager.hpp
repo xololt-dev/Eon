@@ -4,7 +4,7 @@
 #include "command.hpp"
 
 #include <list>
-
+#include <iostream>
 namespace eon {
 	class SystemsManager;
 
@@ -15,9 +15,9 @@ namespace eon {
 		virtual std::shared_ptr<eon::Component> createComponent(ComponentType a_type) = 0;
 		virtual void deleteComponent(std::shared_ptr<Component> a_component) = 0;
 
-		void addCommand(std::shared_ptr<eon::Command>& a_command) 
-			{ commandsPending.push_back(a_command); }
-		void sendCommand(std::shared_ptr<eon::Command>& a_command);
+		void addCommand(const std::shared_ptr<eon::Command>& a_command) 
+			{ commandsPending.push_back(a_command); std::cout << "addCommand Manager\n";}
+		void sendCommand(const std::shared_ptr<eon::Command>& a_command);
 
 		virtual ~Manager() {}
 
@@ -25,7 +25,8 @@ namespace eon {
 			{ return componentList.size(); };
 
 		void setSystemsManager(SystemsManager* a_sysManager) 
-			{ systemsManager = a_sysManager; };
+			{ systemsManager = a_sysManager;
+			std::cout << &*systemsManager << "\n"; };
 
 	protected:
 		SystemsManager* systemsManager;

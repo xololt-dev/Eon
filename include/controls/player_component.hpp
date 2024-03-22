@@ -1,6 +1,7 @@
 #pragma once
 
 #include "component.hpp"
+#include "controls/controls_manager.hpp"
 #include "enums.hpp"
 
 #include <tuple>
@@ -12,8 +13,9 @@ namespace eon {
 		public:
 			void update();
 
-			PlayerComponent() {
+			PlayerComponent(controls::Manager* a_manager) {
 				type = ComponentType::Player;
+				manager = a_manager;
 			}
      		~PlayerComponent() {}
      		PlayerComponent(const PlayerComponent &a_other) {}

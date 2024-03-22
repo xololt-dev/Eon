@@ -41,6 +41,19 @@ namespace eon {
 			void displayID() {
 				std::cout << "Entity ID: " << id << "\n";
 			};
+			
+			void print() {
+				std::cout << "[INFO][Entity]\nID: " << id << "\n"
+				 << "Type: " << entity::getEntityTypeString(type) << "\n"
+				 << "Position: {" 
+				 << position.x << ", " << position.y << ", " << position.z << "}\n"
+				 << "Components number: " << componentsList.size() << "\n";
+			}
+
+			void printComponents() {
+				for (std::shared_ptr<Component>& c : componentsList)
+					c->print(true);
+			}
 
 			void addComponent(std::shared_ptr<eon::controls::PlayerComponent> a_component, ComponentType a_type)
 				{ componentsList.push_back(a_component); };

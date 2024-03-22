@@ -13,7 +13,6 @@
 
 #include <memory>
 #include <atomic>
-#include <vector>
 
 namespace eon {
     class Component;
@@ -36,30 +35,35 @@ namespace eon {
 		void deleteComponent(std::shared_ptr<audio::Component> a_audio);
 		void deleteComponent(std::shared_ptr<render::Component> a_render);
 
-		void sendCommand(std::shared_ptr<Command>& a_command);
+		void sendCommand(const std::shared_ptr<Command>& a_command);
+
+		void printEntities(bool a_components = false) {
+			entities->printEntities(a_components);
+		}
 
 		SystemsManager() {
 			std::cout << "[INFO] Created SystemsManager\n";
 			// NOTE: For now entities manager is a special case - potential TODO
-			entities.setSystemsManager(this);
-
-			std::vector<eon::Manager*> managers = {&controls, &physics, &audio, &render};
-			for (eon::Manager* m : managers)
-				m->setSystemsManager(this);
+			entities = std::make_unique<entity::Manager>(*this);
+			controls = std::make_unique<controls::Manager>(*this);
+			physics = std::make_unique<physics::Manager>(*this);
+			audio = std::make_unique<audio::Manager>(*this);
+			render = std::make_unique<render::Manager>(*this, "Hello Eon", 1280, 720, 
+			(SDL_WindowFlags) (SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI));
 		}
 
 		bool getQuit()
-			{ return controls.getQuit(); };
+			{ return controls->getQuit(); };
 		unsigned long long getNextID()
 			{ return nextID++; };
 
 	protected:
 		static std::atomic_ullong nextID;							// Do we wanna use "slug"s too? (human-readable, unique identifier)
 		
-		controls::Manager controls;
-		physics::Manager physics;
-		audio::Manager audio;
-		render::Manager render;
-		entity::Manager entities;
+		std::unique_ptr<controls::Manager> controls;
+		std::unique_ptr<physics::Manager> physics;
+		std::unique_ptr<audio::Manager> audio;
+		std::unique_ptr<render::Manager> render;
+		std::unique_ptr<entity::Manager> entities;
 	};
 }
