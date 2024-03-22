@@ -4,6 +4,7 @@
 
 #include "component.hpp"
 #include "enums.hpp"
+#include "physics/physics_manager.hpp"
 
 #include <chrono>
 
@@ -16,8 +17,9 @@ namespace eon {
 			void includeMovement(glm::vec3 a_movement) 
 				{ velocity += a_movement; }
 
-			Component() {
+			Component(physics::Manager* a_manager) {
 				type = ComponentType::Physics;
+				manager = a_manager;
 			}
      		~Component() {}
      		Component(const Component &a_other) {}

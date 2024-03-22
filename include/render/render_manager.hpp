@@ -7,6 +7,7 @@
 
 #include <memory>
 #include <string>
+#include <iostream>
 
 namespace eon {
     namespace render {
@@ -36,8 +37,10 @@ namespace eon {
 					printf("Error: SDL_CreateRenderer(): %s\n", SDL_GetError());
 
 				SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+
+				std::cout << "[INFO] Created RenderManager\n";
 			}
-			Manager(std::string a_title, int a_width, int a_height, SDL_WindowFlags a_flags = SDL_WindowFlags(0)) {
+			Manager(SystemsManager& a_sysManager, std::string a_title, int a_width, int a_height, SDL_WindowFlags a_flags = SDL_WindowFlags(0)) {
 				window = SDL_CreateWindow(a_title.c_str(),
 					SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
 					a_width, a_height, 
@@ -55,6 +58,9 @@ namespace eon {
 					printf("Error: SDL_CreateRenderer(): %s\n", SDL_GetError());
 
 				SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+
+				std::cout << "[INFO] Created RenderManager\n";
+				setSystemsManager(&a_sysManager);
 			}
 			~Manager() {
 				SDL_GL_DeleteContext(glContext);
@@ -63,6 +69,7 @@ namespace eon {
     			SDL_DestroyWindow(window);
 				window = nullptr;
 				SDL_Quit();
+				systemsManager = nullptr;
 			}
 			Manager(const Manager& a_other) {}
 

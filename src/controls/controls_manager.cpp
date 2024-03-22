@@ -22,7 +22,7 @@ void eon::controls::Manager::update() {
         return;
     }
 
-    for (std::shared_ptr<Component> c : componentList) {
+    for (std::shared_ptr<Component>& c : componentList) {
         std::cout << "controls component\n";
         if (c->getType() == ComponentType::Player)
             c->update();
@@ -31,9 +31,10 @@ void eon::controls::Manager::update() {
     std::cout << "controls manager update end\n";
 }
 
+// TODO: Different types
 std::shared_ptr<eon::Component> eon::controls::Manager::createComponent(ComponentType a_type) {
-    std::shared_ptr<eon::controls::PlayerComponent> newComp = 
-        std::make_shared<eon::controls::PlayerComponent>();
+    std::shared_ptr<eon::controls::PlayerComponent> newComp(new eon::controls::PlayerComponent(this));
+        //std::make_shared<eon::controls::PlayerComponent>(this); 
 
     componentList.push_back(newComp);
 
@@ -62,3 +63,12 @@ std::tuple<short, short> eon::controls::Manager::getAxisMovement() {
     
     return std::make_tuple(0, 0);
 }
+
+/*
+void eon::controls::Manager::sendCommand(std::shared_ptr<eon::Command>& a_command) {
+    std::cout << "ControlsMan sendCommand " << a_command.use_count() << "\n" << a_command << "\n";
+    std::cout << (systemsManager) << "\n";
+    // << systemsManager << "\n";
+    //systemsManager->sendCommand(a_command);
+}
+*/

@@ -3,6 +3,7 @@
 #include "enums.hpp"
 
 #include <memory>
+#include <iostream>
 
 namespace eon {
 	class Manager;
@@ -15,9 +16,18 @@ namespace eon {
 	public:
 		virtual void update() = 0;
 
-		Component() {}
+		void print(bool a_entity = false) {
+			if (a_entity) {
+				std::cout << "\t[INFO][Component]\n\tID: " << id << "\n\t"
+					<< "Type: " << getComponentTypeString(type) << "\n";
+			}
+			else {
+				std::cout << "[INFO][Component]\nID: " << id << "\n"
+					<< "Type: " << getComponentTypeString(type) << "\n";
+			}			
+		}
+
      	virtual ~Component() {}
-     	Component(const Component& a_other) {}
 
 		ComponentType getType() 
 			{ return type; };			
@@ -30,6 +40,6 @@ namespace eon {
 		unsigned long long id = 0;
 		ComponentType type;
 		std::weak_ptr<entity::Entity> entity;
-		std::weak_ptr<eon::Manager> manager;
+		eon::Manager* manager;
 	};
 }

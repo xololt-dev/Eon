@@ -21,23 +21,23 @@ include(FetchContent)
 #########
 enable_testing()
 add_subdirectory(external/googletest-1.14.0)
-include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+# include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 include(GoogleTest)
 
 ##########
 # OpenGL #
 ##########
 find_package(OpenGL REQUIRED)
-include_directories(${OPENGL_INCLUDE_DIRS})
+#include_directories(${OPENGL_INCLUDE_DIRS})
 
 ########
 # SDL2 #
 ########
 find_package(SDL2 REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS})
+#include_directories(${SDL2_INCLUDE_DIRS})
 
 find_package(SDL2_IMAGE REQUIRED)
-include_directories(${SDL2_IMAGE_INCLUDE_DIR})
+#include_directories(${SDL2_IMAGE_INCLUDE_DIR})
 
 #######
 # GLM #
@@ -86,22 +86,24 @@ file(GLOB SOURCES "${SOURCE_DIR}/*.cpp" "${SOURCE_DIR}/*/*.cpp")
 add_executable(${PROJECT_NAME} ${SOURCES})
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARY})
-target_link_libraries(${PROJECT_NAME} ${GLM_LIBRARIES})#PRIVATE glm::glm)
+target_link_libraries(${PROJECT_NAME} ${GLM_LIBRARIES}) #PRIVATE glm::glm)
+target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${gtest_LIBRARIES})
 target_include_directories(${PROJECT_NAME} PUBLIC ${INCLUDE_DIR})
 
 ########
 # Test #
 ########
+file(GLOB TESTS "tests/*.cc")
 add_executable(
   hello_test
-  tests/hello_test.cc
+  ${TESTS}
 )
 target_link_libraries(
   hello_test
   GTest::gtest_main
 )
 gtest_discover_tests(hello_test)
-# add_test(hello_test hello_test)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

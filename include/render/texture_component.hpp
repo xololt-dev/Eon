@@ -1,6 +1,7 @@
 #pragma once
 
 #include "render_component.hpp"
+#include "render/render_manager.hpp"
 #include "texture.hpp"
 
 #include <memory>
@@ -11,8 +12,11 @@ namespace eon {
 		public:
 			void update();
 
-			TextureComponent() {}
-			TextureComponent(std::string a_path) {
+			TextureComponent(render::Manager* a_manager) {
+				manager = a_manager;
+			}
+			TextureComponent(render::Manager* a_manager, std::string a_path) {
+				manager = a_manager;
 				texture->load(a_path);
 			}
 			~TextureComponent() {}

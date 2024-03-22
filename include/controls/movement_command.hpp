@@ -1,6 +1,7 @@
 #pragma once
 
 #include "command.hpp"
+#include "enums.hpp"
 
 #include <memory>
 
@@ -12,11 +13,12 @@ namespace eon {
 
 			MovementCommand(short a_xAxis, short a_yAxis) :
 				xAxis(a_xAxis), yAxis(a_yAxis) 
-				{}
+				{ type = CommandType::Movement; }
 			MovementCommand(short a_xAxis, short a_yAxis, 
 				std::weak_ptr<eon::entity::Entity> a_srcEntity) :
 				xAxis(a_xAxis), yAxis(a_yAxis) {
 					srcEntity = a_srcEntity;
+					type = CommandType::Movement;
 			}
 			~MovementCommand() {}
 			MovementCommand(const MovementCommand& a_other) {}

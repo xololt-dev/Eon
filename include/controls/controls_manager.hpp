@@ -21,6 +21,8 @@ namespace eon {
 
 			void updateKeybinds();
 
+			// void sendCommand(std::shared_ptr<eon::Command>& a_command);
+
 			Manager() {
 				std::cout << "[INFO] Created ControlsManager\n";
 				loadKeybinds();

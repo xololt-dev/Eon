@@ -14,7 +14,7 @@ void eon::physics::Component::update() {
     std::shared_ptr<eon::physics::DisplacementCommand> command = 
         std::make_shared<eon::physics::DisplacementCommand>(velocity, passPtr);
     std::shared_ptr<eon::Command> sendCommand = std::static_pointer_cast<eon::Command>(command);
-    manager.lock()->sendCommand(sendCommand);
+    manager->sendCommand(sendCommand);
 }
 
 std::tuple<short, short> eon::physics::Component::getUserInput() {

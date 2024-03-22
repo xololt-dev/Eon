@@ -23,12 +23,27 @@ namespace eon {
 
             void addComponent(std::shared_ptr<eon::Component> a_component, unsigned long long a_id);
             
-            void addCommand(std::shared_ptr<eon::Command>& a_command) 
+            void addCommand(const std::shared_ptr<eon::Command>& a_command) 
                 { commandsPending.push_back(a_command); }
-            void sendCommand(std::shared_ptr<eon::Command>& a_command);
+            void sendCommand(const std::shared_ptr<eon::Command>& a_command);
+
+            void printEntities(bool a_components = false) {
+                for (std::shared_ptr<Entity>& e : entitiesList) {
+                    e->print();
+                    
+                    if (a_components)
+                        e->printComponents();
+                }
+            }
+
+            Manager(SystemsManager& a_sysManager) {
+                std::cout << "[INFO] Created EntityManager\n";
+				setSystemsManager(&a_sysManager);
+            }
 
             void setSystemsManager(SystemsManager* a_sysManager) 
-                { systemsManager = a_sysManager; };
+                { systemsManager = a_sysManager;
+                std::cout << &*systemsManager << "\n"; };
             
             size_t getEntitiesAmount()
                 { return entitiesList.size(); };

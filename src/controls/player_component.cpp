@@ -2,10 +2,12 @@
 #include <SDL2/SDL_events.h>
 
 #include "controls/player_component.hpp"
+#include "command.hpp"
 #include "controls/movement_command.hpp"
 #include "manager.hpp"
 
 #include <iostream>
+#include <memory>
 
 // TODO: Proper controls handling (currently one button at the time for some reason)
 void eon::controls::PlayerComponent::update() {
@@ -82,8 +84,8 @@ void eon::controls::PlayerComponent::update() {
     yAxis = yAxisChange;
     
     std::shared_ptr<MovementCommand> command = std::make_shared<MovementCommand>(xAxis, yAxis, entity);
-    std::shared_ptr<Command> sendCommand = command;
-    std::cout << "Command to be sent\n";
-    manager.lock()->sendCommand(sendCommand);
+    std::shared_ptr<Command> sendCommand = std::static_pointer_cast<eon::Command>(command);
+    std::cout << "Command to be sent\n" << command.get() << "\n";
+    manager->sendCommand(sendCommand);
     std::cout << "Command sent\n";
 }

@@ -4,7 +4,7 @@
 #include <memory>
 
 std::shared_ptr<eon::Component> eon::physics::Manager::createComponent(ComponentType a_type) {
-    std::shared_ptr<eon::physics::Component> newComp(new eon::physics::Component());
+    std::shared_ptr<eon::physics::Component> newComp(new eon::physics::Component(this));
 
     componentList.push_back(std::move(newComp));
 
